@@ -1,10 +1,14 @@
 [versions]
 
+constraintlayout = "2.1.4"
+constraintlayoutCompose = "1.0.1"
+constraintlayoutComposeMultiplatform = "0.4.0"
 kotlin = "2.0.0"
 compose = "1.7.0-alpha01"
 agp = "8.5.0"
 androidx-activityCompose = "1.9.0"
 androidx-uiTest = "1.6.8"
+lifecycleViewmodelCompose = "2.8.0-beta01"
 voyager = "1.1.0-beta02"
 coil = "3.0.0-alpha07"
 napier = "2.7.1"
@@ -24,12 +28,18 @@ androidx-paging = "3.3.0"
 sqlite = "2.5.0-SNAPSHOT"
 pagingComposeAndroid = "3.3.0"
 
+androidx-datastore = "1.1.0-alpha03"
+compose-navigation-ver = "2.8.0-alpha02"
+androidx-lifecycle = "2.8.0-alpha01"
+
 
 [libraries]
 
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-testManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "androidx-uiTest" }
 androidx-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "androidx-uiTest" }
+constraintlayout-compose-multiplatform = { module = "tech.annexflow.compose:constraintlayout-compose-multiplatform", version.ref = "constraintlayoutComposeMultiplatform" }
+lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 coil = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coil" }
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil" }
@@ -38,6 +48,11 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
+
+
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore" }
+compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "compose-navigation-ver" }
+
 moko-mvvm = { module = "dev.icerock.moko:mvvm-compose", version.ref = "moko-mvvm" }
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }

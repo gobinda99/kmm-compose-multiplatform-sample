@@ -22,8 +22,8 @@ kotlin {
         compilations.all {
             compileTaskProvider {
                 compilerOptions {
-                    jvmTarget.set(JvmTarget.JVM_1_8)
-                    freeCompilerArgs.add("-Xjdk-release=${JavaVersion.VERSION_1_8}")
+                    jvmTarget.set(JvmTarget.JVM_11)
+                    freeCompilerArgs.add("-Xjdk-release=${JavaVersion.VERSION_11}")
                 }
             }
         }
@@ -56,12 +56,12 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.voyager.navigator)
+//            implementation(libs.voyager.navigator)
             implementation(libs.coil)
             implementation(libs.coil.network.ktor)
             implementation(libs.napier)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.moko.mvvm)
+//            implementation(libs.moko.mvvm)
             implementation(libs.ktor.core)
             implementation(libs.ktor.logging)
             implementation(libs.ktor.serialization)
@@ -70,6 +70,12 @@ kotlin {
             implementation(libs.multiplatformSettings)
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+
+            implementation(libs.compose.navigation)
+            implementation(libs.lifecycle.viewmodel.compose)
+
+            implementation(libs.constraintlayout.compose.multiplatform)
+
 
             implementation(libs.androidx.paging.common)
             implementation(libs.androidx.room.runtime)
@@ -130,9 +136,15 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+       /*sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8*/
+
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
+
+
+
     buildFeatures {
         //enables a Compose tooling support in the AndroidStudio
         compose = true

@@ -14,9 +14,16 @@ moko-mvvm = "0.16.1"
 ktor = "3.0.0-wasm2"
 kotlinx-serialization = "1.7.1"
 multiplatformSettings = "1.1.1"
-koin = "3.6.0-Beta4"
+koin = "3.6.0-wasm-alpha2"
 koin-compose = "1.2.0-Beta4"
 sqlDelight = "2.0.2"
+
+ksp = "2.0.0-1.0.21"
+androidx-room = "2.7.0-alpha04"
+androidx-paging = "3.3.0"
+sqlite = "2.5.0-SNAPSHOT"
+pagingComposeAndroid = "3.3.0"
+
 
 [libraries]
 
@@ -54,6 +61,15 @@ sqlDelight-driver-android = { module = "app.cash.sqldelight:android-driver", ver
 sqlDelight-driver-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 sqlDelight-driver-js = { module = "app.cash.sqldelight:web-worker-driver", version.ref = "sqlDelight" }
 
+androidx-paging-common = { module = "androidx.paging:paging-common", version.ref = "androidx-paging" }
+androidx-paging-compose-android = { group = "androidx.paging", name = "paging-compose-android", version.ref = "pagingComposeAndroid" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
+androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "androidx-room" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
+sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+
+
 [plugins]
 
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
@@ -63,3 +79,7 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 buildConfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
+
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "androidx-room" }
+

@@ -9,6 +9,7 @@ fun appModule() = module {
     single {
         KtorHttpClient.httpClient()
     }
+
    /* single<SplashService> { SplashServiceImpl(get()) }
     single<MainService> { MainServiceImpl(get()) }
     single<AppDataStore> { AppDataStoreManager(context) }

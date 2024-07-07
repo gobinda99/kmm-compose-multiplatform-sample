@@ -2,6 +2,7 @@ package com.gobinda.compose.multiplatform.sample.di
 
 import com.gobinda.compose.multiplatform.sample.KtorHttpClient
 import com.gobinda.compose.multiplatform.sample.common.Context
+import com.gobinda.compose.multiplatform.sample.data.source.local.createRoomDatabase
 import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 
@@ -10,6 +11,7 @@ fun appModule(context: Context) = module {
     single {
         KtorHttpClient.httpClient()
     }
+   single { createRoomDatabase(context) }
 
    /* single<SplashService> { SplashServiceImpl(get()) }
     single<MainService> { MainServiceImpl(get()) }

@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gobinda.compose.multiplatform.sample.data.source.UserRepository
+import com.gobinda.compose.multiplatform.sample.data.source.local.AppDataStore
 import com.gobinda.compose.multiplatform.sample.utils.TripleState
 import com.gobinda.compose.multiplatform.sample.utils.isValidEmail
 import com.gobinda.compose.multiplatform.sample.utils.isValidPassword
@@ -30,7 +31,7 @@ data class SignInState(
 
 class SignInViewModel(
     private val repository: UserRepository,
-//    private val pref : SharedPreferences,
+    private val pref : AppDataStore,
 ) : ViewModel(){
 
 
@@ -84,7 +85,7 @@ class SignInViewModel(
                         if (it.getOrNull() != null) {
                             newState = newState.copy(loading = false, success = true)
                             _uiState.value = newState
-                            /*pref.store("logIn", true)*/
+                            pref.store("logIn", true)
                         } else {
                             newState = newState.copy(
                                 loading = false,
@@ -115,7 +116,7 @@ class SignInViewModel(
         }
     }
 
-    fun anyUserLoggedIn() : Boolean = false/* pref.getBoolean("logIn", false)*/
+    suspend fun anyUserLoggedIn() : Boolean = pref.getBoolean("logIn") ?: false
 
-    fun logout(): Nothing  = TODO()/* pref.store("logIn", false)*/
+    suspend fun logout() = pref.store("logIn", false)
 }

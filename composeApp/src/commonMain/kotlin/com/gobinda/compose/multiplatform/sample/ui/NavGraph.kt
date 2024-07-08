@@ -17,6 +17,7 @@ import androidx.navigation.compose.rememberNavController
 import com.gobinda.compose.multiplatform.sample.data.source.local.AppDatabase
 import com.gobinda.compose.multiplatform.sample.ui.auth.SignInScreen
 import com.gobinda.compose.multiplatform.sample.ui.auth.SignUpScreen
+import kotlinx.coroutines.runBlocking
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -26,7 +27,7 @@ fun NavGraph(
     vm: SignInViewModel =  koinInject()
 
 ) {
-    NavHost(navController = navController, startDestination = if(vm.anyUserLoggedIn()) "home" else "sign_in") {
+    NavHost(navController = navController, startDestination = if(runBlocking { vm.anyUserLoggedIn() } ) "home" else "sign_in") {
         composable("sign_in") {
             SignInScreen(onNavigateHome = {
                 navController.navigate("home") {

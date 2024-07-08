@@ -67,7 +67,7 @@ kotlin {
             implementation(libs.ktor.serialization)
             implementation(libs.ktor.negotiation)
             implementation(libs.kotlinx.serialization.json)
-            implementation(libs.multiplatformSettings)
+//            implementation(libs.multiplatformSettings)
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
 
@@ -80,6 +80,8 @@ kotlin {
             implementation(libs.androidx.paging.common)
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)
+
+            implementation(libs.androidx.datastore.preferences)
         }
 
         commonTest.dependencies {

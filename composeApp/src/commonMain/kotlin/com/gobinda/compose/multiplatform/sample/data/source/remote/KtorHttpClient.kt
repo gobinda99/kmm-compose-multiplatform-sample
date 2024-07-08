@@ -1,4 +1,4 @@
-package com.gobinda.compose.multiplatform.sample
+package com.gobinda.compose.multiplatform.sample.data.source.remote
 
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpResponseValidator

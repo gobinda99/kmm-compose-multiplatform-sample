@@ -1,9 +1,13 @@
 package com.gobinda.compose.multiplatform.sample.di
 
-import com.gobinda.compose.multiplatform.sample.KtorHttpClient
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.gobinda.compose.multiplatform.sample.data.source.remote.KtorHttpClient
 import com.gobinda.compose.multiplatform.sample.common.Context
 import com.gobinda.compose.multiplatform.sample.data.source.UserRepository
 import com.gobinda.compose.multiplatform.sample.data.source.UserRepositoryImpl
+import com.gobinda.compose.multiplatform.sample.data.source.local.AppDataStore
+import com.gobinda.compose.multiplatform.sample.data.source.local.AppDataStoreImpl
 import com.gobinda.compose.multiplatform.sample.data.source.local.AppDatabase
 import com.gobinda.compose.multiplatform.sample.data.source.local.UserLocalDataSource
 import com.gobinda.compose.multiplatform.sample.data.source.local.createRoomDatabase
@@ -18,8 +22,7 @@ fun appModule(context: Context) = module {
         KtorHttpClient.httpClient()
     }
    single<AppDatabase> { createRoomDatabase(context) }
-
-    println("hello 1234")
+   single <AppDataStore>{ AppDataStoreImpl(context) }
 
     single<UserRepository> {
         val localData = UserLocalDataSource(get())
@@ -31,6 +34,6 @@ fun appModule(context: Context) = module {
 
     factory {SignUpViewModel(get()) }
 
-    factory {SignInViewModel(get()) }
+    factory {SignInViewModel(get(), get()) }
 
 }

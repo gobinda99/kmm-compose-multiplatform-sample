@@ -3,6 +3,7 @@
 constraintlayout = "2.1.4"
 constraintlayoutCompose = "1.0.1"
 constraintlayoutComposeMultiplatform = "0.4.0"
+datastorePreferences = "1.1.1"
 kotlin = "2.0.0"
 compose = "1.7.0-alpha01"
 agp = "8.5.0"

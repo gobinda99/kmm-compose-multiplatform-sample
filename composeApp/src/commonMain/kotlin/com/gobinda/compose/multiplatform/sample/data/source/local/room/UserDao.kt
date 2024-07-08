@@ -1,4 +1,4 @@
-package com.gobinda.compose.multiplatform.sample.data.source.local
+package com.gobinda.compose.multiplatform.sample.data.source.local.room
 
 import androidx.room.*
 import com.gobinda.compose.multiplatform.sample.data.User

@@ -1,20 +1,16 @@
 package com.gobinda.compose.multiplatform.sample.ui
 
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
 import com.gobinda.compose.multiplatform.sample.ui.auth.SignInViewModel
 
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.gobinda.compose.multiplatform.sample.data.source.local.AppDatabase
 import com.gobinda.compose.multiplatform.sample.ui.auth.SignInScreen
 import com.gobinda.compose.multiplatform.sample.ui.auth.SignUpScreen
 import kotlinx.coroutines.runBlocking
@@ -49,8 +45,6 @@ fun NavGraph(
             }
         }
         composable("home") {
-             Text("Hello World")
-
            /* NavDrawerScreen(drawerState, onItemClick = {
                 coroutineScope.launch {
                     when(it){

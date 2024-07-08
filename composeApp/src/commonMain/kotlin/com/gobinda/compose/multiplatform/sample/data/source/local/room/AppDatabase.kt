@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gobinda.compose.multiplatform.sample.data.source.local
+package com.gobinda.compose.multiplatform.sample.data.source.local.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

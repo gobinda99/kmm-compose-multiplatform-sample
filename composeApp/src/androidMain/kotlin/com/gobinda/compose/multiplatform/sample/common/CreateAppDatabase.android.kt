@@ -1,13 +1,12 @@
-package com.gobinda.compose.multiplatform.sample.data.source.local
+package com.gobinda.compose.multiplatform.sample.common
 
-import android.annotation.SuppressLint
 import androidx.room.Room
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
-import com.gobinda.compose.multiplatform.sample.common.Context
+import com.gobinda.compose.multiplatform.sample.data.source.local.room.AppDatabase
+import com.gobinda.compose.multiplatform.sample.data.source.local.room.dbFileName
 import kotlinx.coroutines.Dispatchers
 
 actual fun createRoomDatabase(context: Context): AppDatabase {
-    println("hello 1234 database")
      val dbFile = context.getDatabasePath(dbFileName)
         return Room.databaseBuilder<AppDatabase>(context, dbFile.absolutePath)
             .setDriver(BundledSQLiteDriver())

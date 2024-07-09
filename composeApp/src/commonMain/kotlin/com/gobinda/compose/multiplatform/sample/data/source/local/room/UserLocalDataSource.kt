@@ -9,8 +9,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
-class UserLocalDataSource (db: AppDatabase, val dispatcher : CoroutineDispatcher = Dispatchers.IO) :
+class UserLocalDataSource (db: AppDatabase) :
     UserDataSource {
+
+    val dispatcher : CoroutineDispatcher = Dispatchers.IO
 
    val dao = db.userDao()
 

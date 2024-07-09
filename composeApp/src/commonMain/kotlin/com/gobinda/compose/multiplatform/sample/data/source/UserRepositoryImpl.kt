@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.Flow
 class UserRepositoryImpl(
      private val localData: UserDataSource,
      private val remoteData: UserDataSource,
-     private val  dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : UserRepository {
+    private val  dispatcher: CoroutineDispatcher = Dispatchers.IO
 
     override fun getUser(email : String): Flow<Result<User>> {
         return localData.getUser(email)

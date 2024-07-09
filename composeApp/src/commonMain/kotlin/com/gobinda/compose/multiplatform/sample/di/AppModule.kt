@@ -1,6 +1,5 @@
 package com.gobinda.compose.multiplatform.sample.di
 
-import com.gobinda.compose.multiplatform.sample.data.source.remote.KtorHttpClient
 import com.gobinda.compose.multiplatform.sample.common.Context
 import com.gobinda.compose.multiplatform.sample.data.source.UserRepository
 import com.gobinda.compose.multiplatform.sample.data.source.UserRepositoryImpl
@@ -12,7 +11,6 @@ import com.gobinda.compose.multiplatform.sample.common.createRoomDatabase
 import com.gobinda.compose.multiplatform.sample.data.source.UserDataSource
 import com.gobinda.compose.multiplatform.sample.ui.auth.SignInViewModel
 import com.gobinda.compose.multiplatform.sample.ui.auth.SignUpViewModel
-import kotlinx.serialization.json.Json
 import org.koin.compose.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
@@ -20,16 +18,14 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 fun appModule(context: Context) = module {
-    single { Json { isLenient = true; ignoreUnknownKeys = true } }
-    single {
-        KtorHttpClient.httpClient()
-    }
+
+    includes(networkModule)
+
     single <Context>{ context }
 
-    single<AppDatabase> { createRoomDatabase(context) }
+    single<AppDatabase> { createRoomDatabase(get()) }
 
     singleOf(::AppDataStoreImpl){ bind<AppDataStore>() }
-
 
     singleOf(::UserLocalDataSource) { bind<UserDataSource>() }
 

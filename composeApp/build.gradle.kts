@@ -82,6 +82,7 @@ kotlin {
             implementation(libs.sqlite.bundled)
 
             implementation(libs.androidx.datastore.preferences)
+
         }
 
         commonTest.dependencies {

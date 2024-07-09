@@ -1,4 +1,4 @@
-package com.gobinda.compose.multiplatform.sample.utils
+package com.gobinda.compose.multiplatform.sample.component
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -146,7 +146,7 @@ fun Loading() {
         onDismissRequest = {  },
         DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
     ) {
-       ProgressBar()
+     //  ProgressBar()
     }
 
     Box(

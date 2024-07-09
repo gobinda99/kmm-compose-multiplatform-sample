@@ -7,7 +7,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -19,12 +18,12 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gobinda.compose.multiplatform.sample.common.collectAsStateMultiplatform
-import com.gobinda.compose.multiplatform.sample.utils.ActionButton
-import com.gobinda.compose.multiplatform.sample.utils.ClickableLabelText
-import com.gobinda.compose.multiplatform.sample.utils.InputField
-import com.gobinda.compose.multiplatform.sample.utils.Loading
-import com.gobinda.compose.multiplatform.sample.utils.PasswordField
-import com.gobinda.compose.multiplatform.sample.utils.Spacer10
+import com.gobinda.compose.multiplatform.sample.component.ActionButton
+import com.gobinda.compose.multiplatform.sample.component.ClickableLabelText
+import com.gobinda.compose.multiplatform.sample.component.InputField
+import com.gobinda.compose.multiplatform.sample.component.Loading
+import com.gobinda.compose.multiplatform.sample.component.PasswordField
+import com.gobinda.compose.multiplatform.sample.component.Spacer10
 import com.gobinda.compose.multiplatform.sample.utils.TripleState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject

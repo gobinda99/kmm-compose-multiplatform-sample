@@ -21,15 +21,14 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.gobinda.compose.multiplatform.sample.common.collectAsStateMultiplatform
-import com.gobinda.compose.multiplatform.sample.utils.ActionButton
-import com.gobinda.compose.multiplatform.sample.utils.ClickableLabelText
-import com.gobinda.compose.multiplatform.sample.utils.InputField
-import com.gobinda.compose.multiplatform.sample.utils.Loading
-import com.gobinda.compose.multiplatform.sample.utils.PasswordField
-import com.gobinda.compose.multiplatform.sample.utils.Spacer10
+import com.gobinda.compose.multiplatform.sample.component.ActionButton
+import com.gobinda.compose.multiplatform.sample.component.ClickableLabelText
+import com.gobinda.compose.multiplatform.sample.component.InputField
+import com.gobinda.compose.multiplatform.sample.component.Loading
+import com.gobinda.compose.multiplatform.sample.component.PasswordField
+import com.gobinda.compose.multiplatform.sample.component.Spacer10
 import com.gobinda.compose.multiplatform.sample.utils.TripleState
 import org.jetbrains.compose.resources.getString
-import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
 

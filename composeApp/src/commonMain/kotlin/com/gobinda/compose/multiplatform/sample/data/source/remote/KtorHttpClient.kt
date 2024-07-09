@@ -36,26 +36,6 @@ object KtorHttpClient {
         HttpResponseValidator {
             validateResponse { response: HttpResponse ->
                 val statusCode = response.status.value
-
-//                if (statusCode == 401) {
-//                    tokenManager.onTriggerEvent(TokenEvent.Logout)
-//                }
-
-                /*
-                                    when (statusCode) {
-                                        in 300..399 -> throw RedirectResponseException(response)
-                                        in 400..499 -> throw ClientRequestException(response)
-                                        in 500..599 -> throw ServerResponseException(response)
-                                    }
-
-                                    if (statusCode >= 600) {
-                                        throw ResponseException(response)
-                                    }
-                                }
-
-                                handleResponseException { cause: Throwable ->
-                                    throw cause
-                                }*/
             }
         }
 

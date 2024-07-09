@@ -2,12 +2,16 @@ package com.gobinda.compose.multiplatform.sample.navigation
 
 import androidx.navigation.NamedNavArgument
 
-sealed class AppNavigation(
+sealed class SplashNav(
     val route: String, val arguments: List<NamedNavArgument> = emptyList()
 ) {
 
-    data object Splash : AppNavigation(route = "splash", arguments = emptyList())
+    data object Splash : SplashNav(route = "splash")
 
-    data object Main : AppNavigation(route = "main", arguments = emptyList())
+    data object SignIn : SplashNav(route = "sign_in")
+
+    data object SignUp : SplashNav(route = "signup",)
+
 
 }
+

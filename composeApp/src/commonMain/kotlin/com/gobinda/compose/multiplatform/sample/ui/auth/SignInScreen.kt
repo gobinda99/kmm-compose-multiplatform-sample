@@ -35,7 +35,7 @@ import org.koin.compose.koinInject
 @OptIn( ExperimentalMaterial3Api::class)
 @Composable
 fun SignInScreen(
-    vm: SignInViewModel = koinInject(), onNavigateSignUp: () -> Unit, onNavigateHome: () -> Unit
+    vm: SignInViewModel = koinInject(), onNavigateSignUp: () -> Unit, onNavigateMain: () -> Unit
 ) {
     val focusManager = LocalFocusManager.current
     val uiState by vm.uiState.collectAsStateMultiplatform()
@@ -49,7 +49,7 @@ fun SignInScreen(
         }
         uiState.apply {
             if (success) {
-                onNavigateHome()
+                onNavigateMain()
             } else {
                 SignInContent(
                     onNavigateSignUp,

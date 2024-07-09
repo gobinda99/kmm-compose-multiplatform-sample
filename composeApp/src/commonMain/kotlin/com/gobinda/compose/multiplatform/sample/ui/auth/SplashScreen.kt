@@ -11,14 +11,14 @@ import org.koin.compose.koinInject
 @Composable
 internal fun SplashScreen(
     vm: SignInViewModel = koinInject(),
-    onNavigateHome: () -> Unit,
+    onNavigateMain: () -> Unit,
     onNavigateLogin: () -> Unit,
 ) {
 
     LaunchedEffect(true) {
         delay(1000L)
         if (vm.anyUserLoggedIn()) {
-            onNavigateHome()
+            onNavigateMain()
         } else {
             onNavigateLogin()
         }

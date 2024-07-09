@@ -8,10 +8,14 @@ import androidx.compose.ui.Modifier
 import com.gobinda.compose.multiplatform.sample.common.Context
 import com.gobinda.compose.multiplatform.sample.di.appModule
 import com.gobinda.compose.multiplatform.sample.theme.AppTheme
+import io.github.aakira.napier.Antilog
+import io.github.aakira.napier.DebugAntilog
+import io.github.aakira.napier.Napier
 import org.koin.compose.KoinApplication
 
 @Composable
 internal fun App(context: Context) = KoinApplication(application = {
+    Napier.base(DebugAntilog())
     modules(appModule(context))
 }) {
     AppTheme {

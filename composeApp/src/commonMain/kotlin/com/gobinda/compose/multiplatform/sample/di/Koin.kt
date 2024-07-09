@@ -12,6 +12,7 @@ import com.gobinda.compose.multiplatform.sample.common.createRoomDatabase
 import com.gobinda.compose.multiplatform.sample.ui.auth.SignInViewModel
 import com.gobinda.compose.multiplatform.sample.ui.auth.SignUpViewModel
 import kotlinx.serialization.json.Json
+import org.koin.compose.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
 fun appModule(context: Context) = module {
@@ -26,12 +27,8 @@ fun appModule(context: Context) = module {
         val localData = UserLocalDataSource(get())
         UserRepositoryImpl(localData = localData, remoteData = localData)  }
 
- /*   single {
-        client(get())
-    }*/
+    viewModelOf(::SignInViewModel)
 
-    factory {SignUpViewModel(get()) }
-
-    factory {SignInViewModel(get(), get()) }
+    viewModelOf(::SignUpViewModel)
 
 }

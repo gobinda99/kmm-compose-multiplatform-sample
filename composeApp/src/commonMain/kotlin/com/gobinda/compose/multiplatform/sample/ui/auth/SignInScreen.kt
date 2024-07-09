@@ -31,11 +31,13 @@ import com.gobinda.compose.multiplatform.sample.utils.TripleState
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
-@OptIn( ExperimentalMaterial3Api::class)
+@OptIn( ExperimentalMaterial3Api::class, KoinExperimentalAPI::class)
 @Composable
 fun SignInScreen(
-    vm: SignInViewModel = koinInject(), onNavigateSignUp: () -> Unit, onNavigateMain: () -> Unit
+    vm: SignInViewModel = koinViewModel(), onNavigateSignUp: () -> Unit, onNavigateMain: () -> Unit
 ) {
     val focusManager = LocalFocusManager.current
     val uiState by vm.uiState.collectAsStateMultiplatform()

@@ -6,11 +6,13 @@ import com.gobinda.compose.multiplatform.sample.component.Loading
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
-@OptIn(ExperimentalResourceApi::class)
+@OptIn(ExperimentalResourceApi::class, KoinExperimentalAPI::class)
 @Composable
 internal fun SplashScreen(
-    vm: SignInViewModel = koinInject(),
+    vm: SignInViewModel = koinViewModel(),
     onNavigateMain: () -> Unit,
     onNavigateLogin: () -> Unit,
 ) {

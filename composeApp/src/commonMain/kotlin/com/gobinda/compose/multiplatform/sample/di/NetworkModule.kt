@@ -8,6 +8,7 @@ import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.cache.HttpCache
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.observer.ResponseObserver
 import io.ktor.client.request.header
@@ -58,6 +59,11 @@ val networkModule = module {
             install(HttpCache)
             install(Logging) {
                 level = LogLevel.ALL
+                logger = object : Logger {
+                    override fun log(message: String) {
+                        Napier.v(tag = "Ktor Client", message= message)
+                    }
+                }
             }
             install(HttpTimeout) {
                 val timeout = 60000L
@@ -67,7 +73,7 @@ val networkModule = module {
             }
             install(ResponseObserver) {
                 onResponse { response ->
-                    Napier.i("Ktor : ${response.status.value}")
+//                    Napier.i("Ktor : ${response.status.value}")
                 }
             }
             HttpResponseValidator {

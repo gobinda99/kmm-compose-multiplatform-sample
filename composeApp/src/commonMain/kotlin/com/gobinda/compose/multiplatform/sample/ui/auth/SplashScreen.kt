@@ -22,7 +22,9 @@ internal fun SplashScreen(
         if (vm.anyUserLoggedIn()) {
             onNavigateMain()
         } else {
-            onNavigateLogin()
+//            onNavigateLogin()
+            onNavigateMain()
+
         }
     }
 

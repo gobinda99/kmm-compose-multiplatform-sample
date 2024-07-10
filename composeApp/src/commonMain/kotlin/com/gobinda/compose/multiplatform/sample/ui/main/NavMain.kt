@@ -37,15 +37,16 @@ fun NavMain(
             LaunchedEffect(true) {
                 scope.launch {
                     runCatching {
-                        rest::getRandomUser.asFlow().catch {
-                            Napier.e(message = it.message ?: "", throwable = it.cause, tag = "GGGYYY")
-                        }.onEach {
-                            Napier.i(message = it?.email ?: "", tag = "GGGYYY")
-
-                        }.collect()
+//                        rest::getRandomUser.asFlow().catch {
+//                            Napier.e(message = it.message ?: "", throwable = it.cause, tag = "GGGYYY")
+//                        }.onEach {
+//                            Napier.i(message = it?.email ?: "", tag = "GGGYYY")
+//
+//                        }.collect()
+                        rest.getRandomUser()
 
                     }.onSuccess {
-//                        Napier.i(message = it?.email ?: "", tag = "GGGYYY")
+                        Napier.i(message = it?.email ?: "", tag = "GGGYYY")
                     }.onFailure {
                         Napier.e(message = it.message ?: "", throwable = it.cause, tag = "GGGYYY")
                     }

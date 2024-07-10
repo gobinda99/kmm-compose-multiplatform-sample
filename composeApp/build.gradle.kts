@@ -65,8 +65,10 @@ kotlin {
             implementation(libs.ktor.core)
             implementation(libs.ktor.logging)
             implementation(libs.ktor.serialization)
+            implementation(libs.ktor.client.resources)
             implementation(libs.ktor.negotiation)
             implementation(libs.kotlinx.serialization.json)
+
 //            implementation(libs.multiplatformSettings)
             implementation(libs.koin.core)
             implementation(libs.koin.compose)

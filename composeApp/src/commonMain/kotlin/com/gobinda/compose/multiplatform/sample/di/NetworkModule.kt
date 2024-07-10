@@ -1,5 +1,7 @@
 package com.gobinda.compose.multiplatform.sample.di
 
+import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.RestDataSource
+import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.RestDataSourceImpl
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.DefaultRequest
@@ -11,6 +13,7 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.observer.ResponseObserver
+import io.ktor.client.plugins.resources.Resources
 import io.ktor.client.request.header
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
@@ -20,16 +23,16 @@ import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
-const val KEY = "key"
-
-const val URL_HOST = "www.rijksmuseum.nl"
-const val URL_PATH = "api/en/"
 
 @OptIn(ExperimentalSerializationApi::class)
 val networkModule = module {
-//    singleOf(::KtorRijksMuseumNetwork) { bind<RijksMuseumNetworkDataSource>() }
+
+    singleOf(::RestDataSourceImpl){bind<RestDataSource>()}
+
     single {
         Json {
             explicitNulls = false
@@ -43,16 +46,16 @@ val networkModule = module {
 
     single {
         HttpClient {
-            expectSuccess = false
+            expectSuccess = true
             install(DefaultRequest) {
                 url {
-                    protocol = URLProtocol.HTTPS
-                    host = URL_HOST
-                    path(URL_PATH)
-                    /*parameters.append(KEY, BuildConfig.API_KEY)*/
+                    url("https://randomuser.me/")
+                    /*parameters.append("key", "value")*/
                 }
+
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
             }
+            install(Resources)
             install(ContentNegotiation) {
                 json(get())
             }
@@ -73,7 +76,7 @@ val networkModule = module {
             }
             install(ResponseObserver) {
                 onResponse { response ->
-//                    Napier.i("Ktor : ${response.status.value}")
+
                 }
             }
             HttpResponseValidator {

@@ -21,6 +21,6 @@ class UserRepositoryImpl(
     }
 
     override suspend fun updateUser(user: User) {
-        TODO("Not yet implemented")
+        localData.updateUser(user)
     }
 }

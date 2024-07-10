@@ -1,12 +1,19 @@
 package com.gobinda.compose.multiplatform.sample.di
 
+import androidx.constraintlayout.core.dsl.Barrier
 import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.RestDataSource
 import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.RestDataSourceImpl
+import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.request.Token
+import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.request.TokenManager
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.HttpResponseValidator
 import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.auth.Auth
+import io.ktor.client.plugins.auth.providers.BearerTokens
+import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.cache.HttpCache
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
@@ -14,10 +21,12 @@ import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.observer.ResponseObserver
 import io.ktor.client.plugins.resources.Resources
+import io.ktor.client.request.forms.submitForm
 import io.ktor.client.request.header
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
+import io.ktor.http.Parameters
 import io.ktor.http.URLProtocol
 import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
@@ -31,7 +40,7 @@ import org.koin.dsl.module
 @OptIn(ExperimentalSerializationApi::class)
 val networkModule = module {
 
-    singleOf(::RestDataSourceImpl){bind<RestDataSource>()}
+    singleOf(::RestDataSourceImpl) { bind<RestDataSource>() }
 
     single {
         Json {
@@ -64,7 +73,35 @@ val networkModule = module {
                 level = LogLevel.ALL
                 logger = object : Logger {
                     override fun log(message: String) {
-                        Napier.v(tag = "Ktor Client", message= message)
+                        Napier.v(tag = "Ktor Client", message = message)
+                    }
+                }
+            }
+            install(Auth) {
+                bearer {
+                    loadTokens {
+                        with(get<TokenManager>().token) {
+                            BearerTokens(accessToken, refreshToken)
+                        }
+                    }
+
+                    refreshTokens {
+                        with(get<TokenManager>()) {
+                            val refreshTokenInfo: Token = client.submitForm(
+                                url = "token",
+                                formParameters = Parameters.build {
+                                    append("grant_type", "refresh_token")
+//                                append("client_id", clientId)
+                                    append("refresh_token", token.refreshToken)
+                                }
+                            ) { markAsRefreshTokenRequest() }.body()
+
+                            saveToken(refreshTokenInfo)
+
+                            with(refreshTokenInfo) {
+                                BearerTokens(accessToken, refreshToken)
+                            }
+                        }
                     }
                 }
             }

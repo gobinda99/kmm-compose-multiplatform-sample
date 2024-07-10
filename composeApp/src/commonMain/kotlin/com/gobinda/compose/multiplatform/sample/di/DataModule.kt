@@ -6,7 +6,9 @@ import com.gobinda.compose.multiplatform.sample.data.source.local.AppDataStore
 import com.gobinda.compose.multiplatform.sample.data.source.local.AppDataStoreImpl
 import com.gobinda.compose.multiplatform.sample.data.source.local.room.AppDatabase
 import com.gobinda.compose.multiplatform.sample.data.source.local.room.UserLocalDataSource
+import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.request.TokenManager
 import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
@@ -19,4 +21,7 @@ val dataModule = module {
     singleOf(::AppDataStoreImpl) { bind<AppDataStore>() }
 
     singleOf(::UserLocalDataSource) { bind<UserDataSource>() }
+
+    singleOf(::TokenManager)
+
 }

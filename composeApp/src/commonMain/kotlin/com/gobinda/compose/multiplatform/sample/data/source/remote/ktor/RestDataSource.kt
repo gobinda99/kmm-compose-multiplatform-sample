@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface RestDataSource {
     suspend fun getRandomUser() : RandomUser?
 
-    fun getRandomUser1() : Flow<RandomUser?>
+    fun getRandomUserAsFlow() : Flow<RandomUser?>
 
     suspend fun postUser( user: RandomUser) : HttpResponse
 

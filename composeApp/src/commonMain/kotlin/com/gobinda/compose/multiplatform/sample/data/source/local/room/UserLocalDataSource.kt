@@ -30,7 +30,9 @@ class UserLocalDataSource (db: AppDatabase) :
     }
 
     override suspend fun updateUser(user: User) {
-        TODO("Not yet implemented")
+        withContext(dispatcher){
+            dao.insertUser(user)
+        }
     }
 
 }

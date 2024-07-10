@@ -11,21 +11,19 @@ import io.ktor.client.plugins.resources.put
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flow
 
 
-class RestDataSourceImpl(val httpClient: HttpClient) : RestDataSource {
+class RestDataSourceImpl(private val httpClient: HttpClient) : RestDataSource {
 
     override suspend fun getRandomUser(): RandomUser? {
         return httpClient.get(UserResource()).body<RandomUserResponse>().results.firstOrNull()
     }
 
-    override  fun getRandomUser1(): Flow<RandomUser?> {
-        return flow {
-            emit(httpClient.get(UserResource()).body<RandomUserResponse>().results.firstOrNull())
-        }
+    override fun getRandomUserAsFlow(): Flow<RandomUser?> {
+      return ::getRandomUser.asFlow()
     }
-
 
     override suspend fun postUser(user: RandomUser) : HttpResponse {
         return httpClient.post(UserResource()){

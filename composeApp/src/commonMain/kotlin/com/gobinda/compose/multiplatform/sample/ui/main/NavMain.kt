@@ -13,7 +13,10 @@ import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.RestData
 import com.gobinda.compose.multiplatform.sample.navigation.MainNav
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
@@ -34,9 +37,15 @@ fun NavMain(
             LaunchedEffect(true) {
                 scope.launch {
                     runCatching {
-                        rest.getRandomUser()
+                        rest::getRandomUser.asFlow().catch {
+                            Napier.e(message = it.message ?: "", throwable = it.cause, tag = "GGGYYY")
+                        }.onEach {
+                            Napier.i(message = it?.email ?: "", tag = "GGGYYY")
+
+                        }.collect()
+
                     }.onSuccess {
-                        Napier.i(message = it?.email ?: "", tag = "GGGYYY")
+//                        Napier.i(message = it?.email ?: "", tag = "GGGYYY")
                     }.onFailure {
                         Napier.e(message = it.message ?: "", throwable = it.cause, tag = "GGGYYY")
                     }

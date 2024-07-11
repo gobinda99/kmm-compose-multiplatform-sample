@@ -1,5 +1,6 @@
 package com.gobinda.compose.multiplatform.sample.data.source.remote.ktor
 
+import com.gobinda.compose.multiplatform.sample.data.DogsModel
 import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.response.RandomUser
 import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.response.RandomUserResponse
 import io.ktor.client.HttpClient
@@ -8,8 +9,11 @@ import io.ktor.client.plugins.resources.delete
 import io.ktor.client.plugins.resources.get
 import io.ktor.client.plugins.resources.post
 import io.ktor.client.plugins.resources.put
+import io.ktor.client.request.get
+import io.ktor.client.request.parameter
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
+import io.ktor.http.parameters
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flow
@@ -46,7 +50,14 @@ class RestDataSourceImpl(private val httpClient: HttpClient) : RestDataSource {
          httpClient.delete(UserResource.Id(id= id))
     }
 
-
+    override suspend fun getAllDogs(page: Int, limit: Int): List<DogsModel> {
+       return httpClient.get("https://api.thedogapi.com/v1/images/search") {
+            url {
+                parameters.append("page", page.toString())
+                parameters.append("limit", limit.toString())
+            }
+        }.body()
+    }
 }
 
 

@@ -57,8 +57,14 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 //            implementation(libs.voyager.navigator)
-            implementation(libs.coil)
+
+
+            implementation(libs.coil.compose)
+            implementation(libs.coil.compose.core)
             implementation(libs.coil.network.ktor)
+            implementation(libs.coil)
+
+
             implementation(libs.napier)
             implementation(libs.kotlinx.coroutines.core)
 //            implementation(libs.moko.mvvm)
@@ -81,7 +87,13 @@ kotlin {
             implementation(libs.constraintlayout.compose.multiplatform)
 
 
-            implementation(libs.androidx.paging.common)
+//            implementation(libs.androidx.paging.common)
+//            implementation (libs.androidx.paging.compose)
+            implementation ( libs.androidx.paging.runtime.ktx)
+
+            implementation(libs.paging.common)
+            implementation(libs.paging.compose.common)
+
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)
 
@@ -109,6 +121,8 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
             implementation(libs.sqlDelight.driver.native)
+            implementation(libs.paging.runtime.uikit)
+
         }
 
     }

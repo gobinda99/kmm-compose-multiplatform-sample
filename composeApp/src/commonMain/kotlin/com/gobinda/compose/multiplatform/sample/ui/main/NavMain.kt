@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.RestDataSource
 import com.gobinda.compose.multiplatform.sample.navigation.MainNav
+import com.gobinda.compose.multiplatform.sample.ui.pagination.DogsScreen
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
 import kotlinx.coroutines.flow.asFlow
@@ -28,7 +29,7 @@ fun NavMain(
     val navController: NavHostController = rememberNavController()
 
     NavHost(navController = navController, startDestination = MainNav.Home.route) {
-        composable(MainNav.Home.route) {
+        /*composable(MainNav.Home.route) {
             val scope = rememberCoroutineScope()
             val client = koinInject<HttpClient>()
             val rest = koinInject<RestDataSource>()
@@ -37,21 +38,19 @@ fun NavMain(
             LaunchedEffect(true) {
                 scope.launch {
                     runCatching {
-//                        rest::getRandomUser.asFlow().catch {
-//                            Napier.e(message = it.message ?: "", throwable = it.cause, tag = "GGGYYY")
-//                        }.onEach {
-//                            Napier.i(message = it?.email ?: "", tag = "GGGYYY")
-//
-//                        }.collect()
-                        rest.getRandomUser()
+                        rest.getAllDogs(1,20)
 
                     }.onSuccess {
-                        Napier.i(message = it?.email ?: "", tag = "GGGYYY")
+                        Napier.i(message = it?.size.toString() ?: "", tag = "GGGYYY")
                     }.onFailure {
                         Napier.e(message = it.message ?: "", throwable = it.cause, tag = "GGGYYY")
                     }
                 }
             }
+        }*/
+
+        composable(MainNav.Home.route) {
+            DogsScreen()
         }
 
     }

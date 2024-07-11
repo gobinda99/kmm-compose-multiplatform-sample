@@ -36,6 +36,11 @@ class ModelDataSource (db: AppDatabase) {
        return dao.getAllDogs()
     }
 
+    suspend fun getAllDogs(pageIndex: Int, pageSize: Int): List<DogsModel>{
+
+        return dao.getAllDogs(pageIndex, pageSize)
+    }
+
 
 
 }

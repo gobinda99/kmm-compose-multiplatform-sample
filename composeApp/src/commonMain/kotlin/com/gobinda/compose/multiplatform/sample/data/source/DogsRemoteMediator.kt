@@ -54,6 +54,7 @@ class DogsRemoteMediator (
               db.modelDao().insert(response)
 
           }
+           Napier.d("med $endOfList")
 
 
           /*db.withTransaction {

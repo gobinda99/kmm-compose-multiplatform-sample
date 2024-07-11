@@ -15,11 +15,13 @@ class DogsRepository (
         val data = apiService.getAllDogs(
             page, limit
         )
-        dataSource.insertModel(data)
+//        dataSource.insertModel(data)
         return data
     }
 
      fun getLocalDogs(): PagingSource<Int, DogsModel> = dataSource.getPagingModels()
+
+     suspend fun getLocalDogs(pageIndex: Int, pageSize: Int) = dataSource.getAllDogs(pageIndex, pageIndex)
 
 
 

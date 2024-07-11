@@ -17,5 +17,8 @@ interface ModelDao {
     @Query("DELETE FROM pagination_data")
     suspend fun clearAll()
 
+    @Query("SELECT * FROM pagination_data LIMIT :pageSize OFFSET :pageIndex")
+    suspend fun getAllDogs(pageIndex: Int, pageSize: Int ) : List<DogsModel>
+
 }
 

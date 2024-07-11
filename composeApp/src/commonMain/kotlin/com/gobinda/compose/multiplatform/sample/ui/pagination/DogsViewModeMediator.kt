@@ -27,7 +27,9 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagingApi::class)
 class DogsViewModeMediator(
-    private val db:AppDatabase,private val apiService: RestDataSource
+    private val db:AppDatabase,private val apiService: RestDataSource,
+    private val pagingSource: DogsPagingSource
+
 ) : ViewModel() {
 
     private val _dogResponse: MutableStateFlow<PagingData<DogsModel>> =
@@ -38,8 +40,9 @@ class DogsViewModeMediator(
     init {
         viewModelScope.launch {
             Pager(
-                config = PagingConfig(100, enablePlaceholders = false),
-                pagingSourceFactory = { db.modelDao().getAllDogs() },
+                config = PagingConfig(50, enablePlaceholders = false),
+//                pagingSourceFactory = { db.modelDao().getAllDogs() },
+                pagingSourceFactory = { pagingSource },
                 remoteMediator = DogsRemoteMediator(db, apiService)
             ).flow.flowOn(Dispatchers.IO).
             cachedIn(viewModelScope).collect{

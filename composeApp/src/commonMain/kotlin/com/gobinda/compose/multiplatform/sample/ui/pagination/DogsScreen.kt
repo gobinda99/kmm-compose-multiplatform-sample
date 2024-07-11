@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import app.cash.paging.compose.collectAsLazyPagingItems
 import coil3.compose.AsyncImage
+import com.gobinda.compose.multiplatform.sample.data.source.DogsRemoteMediator
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -28,7 +29,8 @@ import sample.composeapp.generated.resources.ic_cyclone
 @Composable
 fun DogsScreen(
     modifier: Modifier = Modifier,
-    viewModel: DogsViewModel = koinViewModel()
+//    viewModel: DogsViewModel = koinViewModel()
+    viewModel: DogsViewModeMediator = koinViewModel()
 ) {
     val response = viewModel.dogResponse.collectAsLazyPagingItems()
 

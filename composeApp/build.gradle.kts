@@ -94,7 +94,10 @@ kotlin {
             implementation(libs.paging.common)
             implementation(libs.paging.compose.common)
 
+            implementation(libs.androidx.room.paging)
             implementation(libs.androidx.room.runtime)
+            implementation (libs.androidx.room.ktx)
+
             implementation(libs.sqlite.bundled)
 
             implementation(libs.androidx.datastore.preferences)

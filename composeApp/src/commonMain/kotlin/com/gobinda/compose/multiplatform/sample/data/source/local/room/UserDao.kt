@@ -1,5 +1,6 @@
 package com.gobinda.compose.multiplatform.sample.data.source.local.room
 
+import androidx.paging.PagingSource
 import androidx.room.*
 import com.gobinda.compose.multiplatform.sample.data.User
 import kotlinx.coroutines.flow.Flow
@@ -23,5 +24,6 @@ interface UserDao {
 
     @Insert
     suspend fun insertUser(user: User): Long
+
 }
 

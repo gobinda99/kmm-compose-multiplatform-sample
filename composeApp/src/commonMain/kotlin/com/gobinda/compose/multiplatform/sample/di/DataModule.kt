@@ -5,6 +5,7 @@ import com.gobinda.compose.multiplatform.sample.data.source.UserDataSource
 import com.gobinda.compose.multiplatform.sample.data.source.local.AppDataStore
 import com.gobinda.compose.multiplatform.sample.data.source.local.AppDataStoreImpl
 import com.gobinda.compose.multiplatform.sample.data.source.local.room.AppDatabase
+import com.gobinda.compose.multiplatform.sample.data.source.local.room.ModelDataSource
 import com.gobinda.compose.multiplatform.sample.data.source.local.room.UserLocalDataSource
 import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.DogsRepository
 import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.request.TokenManager
@@ -22,6 +23,8 @@ val dataModule = module {
     singleOf(::AppDataStoreImpl) { bind<AppDataStore>() }
 
     singleOf(::UserLocalDataSource) { bind<UserDataSource>() }
+
+    singleOf(::ModelDataSource)
 
     singleOf(::TokenManager)
 

@@ -17,11 +17,16 @@ package com.gobinda.compose.multiplatform.sample.data.source.local.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.gobinda.compose.multiplatform.sample.data.DogsModel
+import com.gobinda.compose.multiplatform.sample.data.RemoteKeys
 import com.gobinda.compose.multiplatform.sample.data.User
 
-@Database(entities = [User::class], version = 1)
+@Database(entities = [User::class, DogsModel::class, RemoteKeys::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun modelDao(): ModelDao
+    abstract fun remoteKeyDao():RemoteKeysDao
+
 }
 
 internal const val dbFileName = "sample.db"

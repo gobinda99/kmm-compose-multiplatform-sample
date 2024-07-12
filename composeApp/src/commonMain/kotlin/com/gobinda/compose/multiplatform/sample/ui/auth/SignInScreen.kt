@@ -60,10 +60,10 @@ fun SignInScreen(
                     loading = loading,
                     onValidate = {
                         focusManager.clearFocus()
-                        vm.validate()
+                        vm.onEvent(SignInEvent.Validate)
                     }) { _email, _pass ->
-                    _email?.let { vm.setEmail(it) }
-                    _pass?.let { vm.setPass(it) }
+                    _email?.let { vm.onEvent(SignInEvent.Email(it)) }
+                    _pass?.let { vm.onEvent(SignInEvent.Pass(it)) }
                 }
             }
         }

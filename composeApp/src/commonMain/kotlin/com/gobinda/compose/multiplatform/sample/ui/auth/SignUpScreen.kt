@@ -57,58 +57,26 @@ fun SignUpScreen(vm: SignUpViewModel = koinViewModel(), onNavigateSignIn: () -> 
                     loading,
                     onValueChange = { _name, _email, _pass, _cPass ->
                         _name?.let {
-                            vm.setName(it)
+                            vm.onEvent(SignUpEvent.Name(it))
                         }
                         _email?.let {
-                            vm.setEmail(it)
+                            vm.onEvent(SignUpEvent.Email(it))
                         }
                         _pass?.let {
-                            vm.setPass(it)
+                            vm.onEvent(SignUpEvent.Pass(it))
                         }
                         _cPass?.let {
-                            vm.setConfirmPass(it)
+                            vm.onEvent(SignUpEvent.Confirm(it))
                         }
                     },
                     onValidate = {
                         focusManager.clearFocus()
-                        vm.validate()
+                        vm.onEvent(SignUpEvent.Validate)
                     }, onNavigateSignIn = onNavigateSignIn
                 )
             }
         }
     }
-
-  /*  uiState.apply {
-        if (success) {
-            onNavigateSignIn()
-        } else {
-            SignUpContent(
-                name,
-                email,
-                pass,
-                cPass,
-                loading,
-                onValueChange = { _name, _email, _pass, _cPass ->
-                    _name?.let {
-                        vm.setName(it)
-                    }
-                    _email?.let {
-                        vm.setEmail(it)
-                    }
-                    _pass?.let {
-                        vm.setPass(it)
-                    }
-                    _cPass?.let {
-                        vm.setConfirmPass(it)
-                    }
-                },
-                onValidate = {
-                    focusManager.clearFocus()
-                    vm.validate()
-                }, onNavigateSignIn = onNavigateSignIn
-            )
-        }
-    }*/
 
 }
 

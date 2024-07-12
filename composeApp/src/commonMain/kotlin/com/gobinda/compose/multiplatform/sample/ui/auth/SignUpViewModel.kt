@@ -31,6 +31,14 @@ data class SignUpState(
     val message : String? = null
 )
 
+sealed interface SignUpEvent{
+    data object  Validate : SignUpEvent
+    class Name(val name: String) : SignUpEvent
+    class Email(val name: String) : SignUpEvent
+    class Pass( val name: String) : SignUpEvent
+    class Confirm(val name: String) : SignUpEvent
+}
+
 class SignUpViewModel constructor(
     private val repository: UserRepository, /*savedStateHandle: SavedStateHandle*/
 ) : ViewModel() {
@@ -40,7 +48,18 @@ class SignUpViewModel constructor(
     val uiState: StateFlow<SignUpState>
         get() = _uiState
 
-    fun validate() {
+    fun onEvent(event: SignUpEvent){
+        when(event){
+            is SignUpEvent.Confirm -> setConfirmPass(event.name)
+            is SignUpEvent.Email -> setEmail(event.name)
+            is SignUpEvent.Name -> setName(event.name)
+            is SignUpEvent.Pass -> setPass(event.name)
+            is SignUpEvent.Validate -> validate()
+        }
+    }
+
+
+   private fun validate() {
         viewModelScope.launch {
             var newState = _uiState.value
             with(_uiState.value) {
@@ -106,25 +125,25 @@ class SignUpViewModel constructor(
 
     }
 
-    fun setName(_name: String) {
+    private fun setName(_name: String) {
         with(_uiState.value) {
             _uiState.value = copy(name = name.copy(_name, isError = false), message = null)
         }
     }
 
-    fun setEmail(_email: String) {
+    private fun setEmail(_email: String) {
         with(_uiState.value) {
             _uiState.value = copy(email = email.copy(_email, isError = false), message = null)
         }
     }
 
-    fun setPass(_pass: String) {
+    private fun setPass(_pass: String) {
         with(_uiState.value) {
             _uiState.value = copy(pass = pass.copy(_pass, isError = false), message = null)
         }
     }
 
-    fun setConfirmPass(_cPass: String) {
+    private fun setConfirmPass(_cPass: String) {
         with(_uiState.value) {
             _uiState.value = copy(cPass = cPass.copy(_cPass, isError = false), message = null)
         }

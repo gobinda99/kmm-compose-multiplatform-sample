@@ -29,6 +29,12 @@ data class SignInState(
     val message: StringResource? = null,
 )
 
+sealed interface SignInEvent{
+    data object  Validate : SignInEvent
+    class Email(val name: String) : SignInEvent
+    class Pass( val name: String) : SignInEvent
+}
+
 class SignInViewModel(
     private val repository: UserRepository,
     private val pref : AppDataStore,
@@ -40,7 +46,15 @@ class SignInViewModel(
     val uiState: StateFlow<SignInState>
         get() = _uiState
 
-    fun validate() {
+    fun onEvent(event: SignInEvent){
+        when(event){
+            is SignInEvent.Email -> setEmail(event.name)
+            is SignInEvent.Pass -> setPass(event.name)
+            is SignInEvent.Validate -> validate()
+        }
+    }
+
+    private fun validate() {
         viewModelScope.launch {
             var newState = uiState.value
             with(uiState.value) {
@@ -104,19 +118,16 @@ class SignInViewModel(
 
     }
 
-    fun setEmail(_email: String) {
+    private fun setEmail(_email: String) {
         with(_uiState.value) {
             _uiState.value = copy(email = email.copy(_email, isError = false), message = null)
         }
     }
 
-    fun setPass(_pass: String) {
+   private fun setPass(_pass: String) {
         with(_uiState.value) {
             _uiState.value = copy(pass = pass.copy(_pass, isError = false), message = null)
         }
     }
 
-    suspend fun anyUserLoggedIn() : Boolean = pref.getBoolean("logIn") ?: false
-
-    suspend fun logout() = pref.store("logIn", false)
 }

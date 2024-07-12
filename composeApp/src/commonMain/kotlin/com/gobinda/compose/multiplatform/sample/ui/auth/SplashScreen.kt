@@ -2,32 +2,36 @@ package com.gobinda.compose.multiplatform.sample.ui.auth
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import com.gobinda.compose.multiplatform.sample.common.collectAsStateMultiplatform
 import com.gobinda.compose.multiplatform.sample.component.Loading
-import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
 @OptIn(ExperimentalResourceApi::class, KoinExperimentalAPI::class)
 @Composable
 internal fun SplashScreen(
-    vm: SignInViewModel = koinViewModel(),
+    vm: SplashViewModel = koinViewModel(),
     onNavigateMain: () -> Unit,
     onNavigateLogin: () -> Unit,
 ) {
+    val uiState by vm.state.collectAsStateMultiplatform()
 
-    LaunchedEffect(true) {
-        delay(1000L)
-        if (vm.anyUserLoggedIn()) {
-            onNavigateMain()
-        } else {
-//            onNavigateLogin()
-            onNavigateMain()
-
-        }
+    LaunchedEffect(true){
+        vm.userIntent.trySend(SplashIntent.LogIn)
     }
 
-    Loading()
+    when (val state = uiState) {
+        is SplashState.Loading -> Loading()
+        is SplashState.Success -> {
+            if (state.anyUserLogIn) {
+                onNavigateMain()
+            } else {
+                onNavigateLogin()
+            }
+        }
+        is SplashState.Error -> {}
+    }
 
 }

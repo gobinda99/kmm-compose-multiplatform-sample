@@ -40,7 +40,7 @@ class DogsViewModeMediator(
     init {
         viewModelScope.launch {
             Pager(
-                config = PagingConfig(50, enablePlaceholders = false),
+                config = PagingConfig(20, enablePlaceholders = false),
 //                pagingSourceFactory = { db.modelDao().getAllDogs() },
                 pagingSourceFactory = { pagingSource },
                 remoteMediator = DogsRemoteMediator(db, apiService)

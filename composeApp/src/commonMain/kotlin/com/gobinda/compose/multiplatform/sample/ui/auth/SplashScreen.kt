@@ -28,7 +28,8 @@ internal fun SplashScreen(
             if (state.anyUserLogIn) {
                 onNavigateMain()
             } else {
-                onNavigateLogin()
+                 onNavigateMain()
+//                onNavigateLogin()
             }
         }
         is SplashState.Error -> {}

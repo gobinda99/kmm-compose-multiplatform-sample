@@ -70,7 +70,7 @@ val networkModule = module {
             }
             install(HttpCache)
             install(Logging) {
-                level = LogLevel.ALL
+                level = LogLevel.INFO
                 logger = object : Logger {
                     override fun log(message: String) {
                         Napier.v(tag = "Ktor Client", message = message)

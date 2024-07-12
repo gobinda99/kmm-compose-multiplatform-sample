@@ -8,22 +8,24 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.consumeAsFlow
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 
 sealed interface SplashState {
     data object Loading : SplashState
-    data class Success(val anyUserLogIn: Boolean) :SplashState
+    data class Success(val anyUserLogIn: Boolean) : SplashState
     data class Error(val message: String) : SplashState
 }
 
-sealed interface SplashIntent{
-    data object  LogIn : SplashIntent
+sealed interface SplashIntent {
+    data object LogIn : SplashIntent
 }
 
 class SplashViewModel(
-    private val pref : AppDataStore,
-) : ViewModel(){
+    private val pref: AppDataStore,
+) : ViewModel() {
 
     val userIntent = Channel<SplashIntent>(Channel.UNLIMITED)
 
@@ -38,17 +40,18 @@ class SplashViewModel(
 
     private fun handleIntent() {
         viewModelScope.launch {
-            userIntent.consumeAsFlow().collect {
-                when (it) {
-                    SplashIntent.LogIn -> {
-                        login()
+            userIntent.consumeAsFlow()
+                .onEach {
+                    when (it) {
+                        SplashIntent.LogIn -> {
+                            login()
+                        }
                     }
-                }
-            }
+                }.stateIn(viewModelScope)
         }
     }
 
-   private suspend  fun login() {
+    private suspend fun login() {
         viewModelScope.launch {
             _state.value = SplashState.Loading
             delay(1000L)
@@ -57,7 +60,7 @@ class SplashViewModel(
     }
 
 
-    private suspend fun anyUserLoggedIn() : Boolean = pref.getBoolean("logIn") ?: false
+    private suspend fun anyUserLoggedIn(): Boolean = pref.getBoolean("logIn") ?: false
 
     private suspend fun logout() = pref.store("logIn", false)
 }

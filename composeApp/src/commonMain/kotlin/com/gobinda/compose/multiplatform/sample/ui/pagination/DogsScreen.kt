@@ -42,7 +42,7 @@ fun DogsScreen(
         items(response.itemCount) {
             AsyncImage(
                 model = response[it]?.url ?: "-",
-                placeholder = painterResource(Res.drawable.ic_cyclone),
+               /* placeholder = painterResource(Res.drawable.ic_cyclone),*/
                 contentDescription = "",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

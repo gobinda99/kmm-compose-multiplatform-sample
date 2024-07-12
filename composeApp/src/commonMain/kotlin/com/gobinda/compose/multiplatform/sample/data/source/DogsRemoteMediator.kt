@@ -6,12 +6,11 @@ import app.cash.paging.ExperimentalPagingApi
 import app.cash.paging.LoadType
 import app.cash.paging.PagingState
 import app.cash.paging.RemoteMediator
-import coil3.network.HttpException
 import com.gobinda.compose.multiplatform.sample.data.DogsModel
 import com.gobinda.compose.multiplatform.sample.data.RemoteKeys
 import com.gobinda.compose.multiplatform.sample.data.source.local.room.AppDatabase
 import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.RestDataSource
-import io.github.aakira.napier.Napier
+import io.ktor.client.plugins.ClientRequestException
 import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -54,16 +53,14 @@ class DogsRemoteMediator (
               db.modelDao().insert(response)
 
           }
-           Napier.d("med $endOfList")
-
 
           /*db.withTransaction {
 
           }*/
          return MediatorResult.Success(endOfPaginationReached = endOfList)
-      }catch (e: IOException){
-       return   MediatorResult.Error(e)
-      }catch (e: HttpException){
+      }catch (e: IOException) {
+          return MediatorResult.Error(e)
+      }catch (e: ClientRequestException){
           return MediatorResult.Error(e)
       }
     }

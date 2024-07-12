@@ -1,4 +1,4 @@
-package com.gobinda.compose.multiplatform.sample.ui.auth
+package com.gobinda.compose.multiplatform.sample.presentation.ui.auth
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -18,15 +18,14 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gobinda.compose.multiplatform.sample.common.collectAsStateMultiplatform
-import com.gobinda.compose.multiplatform.sample.component.ActionButton
-import com.gobinda.compose.multiplatform.sample.component.ClickableLabelText
-import com.gobinda.compose.multiplatform.sample.component.InputField
-import com.gobinda.compose.multiplatform.sample.component.Loading
-import com.gobinda.compose.multiplatform.sample.component.PasswordField
-import com.gobinda.compose.multiplatform.sample.component.Spacer10
+import com.gobinda.compose.multiplatform.sample.presentation.component.ActionButton
+import com.gobinda.compose.multiplatform.sample.presentation.component.ClickableLabelText
+import com.gobinda.compose.multiplatform.sample.presentation.component.InputField
+import com.gobinda.compose.multiplatform.sample.presentation.component.Loading
+import com.gobinda.compose.multiplatform.sample.presentation.component.PasswordField
+import com.gobinda.compose.multiplatform.sample.presentation.component.Spacer10
 import com.gobinda.compose.multiplatform.sample.utils.TripleState
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 

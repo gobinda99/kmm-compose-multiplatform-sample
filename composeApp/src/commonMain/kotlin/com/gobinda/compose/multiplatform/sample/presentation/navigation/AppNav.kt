@@ -1,4 +1,4 @@
-package com.gobinda.compose.multiplatform.sample.navigation
+package com.gobinda.compose.multiplatform.sample.presentation.navigation
 
 import androidx.navigation.NamedNavArgument
 

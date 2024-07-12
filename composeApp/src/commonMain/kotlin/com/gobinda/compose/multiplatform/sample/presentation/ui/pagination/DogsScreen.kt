@@ -1,4 +1,4 @@
-package com.gobinda.compose.multiplatform.sample.ui.pagination
+package com.gobinda.compose.multiplatform.sample.presentation.ui.pagination
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,12 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import app.cash.paging.compose.collectAsLazyPagingItems
 import coil3.compose.AsyncImage
-import com.gobinda.compose.multiplatform.sample.data.source.DogsRemoteMediator
-import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
-import sample.composeapp.generated.resources.Res
-import sample.composeapp.generated.resources.ic_cyclone
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable

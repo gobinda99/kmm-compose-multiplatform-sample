@@ -1,4 +1,4 @@
-package com.gobinda.compose.multiplatform.sample
+package com.gobinda.compose.multiplatform.sample.presentation
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -7,9 +7,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.gobinda.compose.multiplatform.sample.navigation.AppNav
-import com.gobinda.compose.multiplatform.sample.ui.auth.NavSplashAuth
-import com.gobinda.compose.multiplatform.sample.ui.main.NavMain
+import com.gobinda.compose.multiplatform.sample.presentation.navigation.AppNav
+import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.NavSplashAuth
+import com.gobinda.compose.multiplatform.sample.presentation.ui.main.NavMain
 
 @Composable
 fun NavApp(

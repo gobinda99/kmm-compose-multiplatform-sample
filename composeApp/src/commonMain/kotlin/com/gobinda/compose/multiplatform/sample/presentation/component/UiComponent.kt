@@ -1,4 +1,4 @@
-package com.gobinda.compose.multiplatform.sample.component
+package com.gobinda.compose.multiplatform.sample.presentation.component
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape

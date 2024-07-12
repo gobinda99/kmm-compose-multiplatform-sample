@@ -1,6 +1,5 @@
-package com.gobinda.compose.multiplatform.sample.ui.auth
+package com.gobinda.compose.multiplatform.sample.presentation.ui.auth
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gobinda.compose.multiplatform.sample.data.User

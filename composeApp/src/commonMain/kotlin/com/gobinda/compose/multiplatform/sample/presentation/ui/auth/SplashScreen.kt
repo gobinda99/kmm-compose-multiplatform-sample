@@ -5,6 +5,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import com.gobinda.compose.multiplatform.sample.common.collectAsStateMultiplatform
 import com.gobinda.compose.multiplatform.sample.presentation.component.Loading
+import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.event.SplashEvent
+import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.state.SplashState
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -19,7 +21,7 @@ internal fun SplashScreen(
     val uiState by vm.state.collectAsStateMultiplatform()
 
     LaunchedEffect(true){
-        vm.userIntent.trySend(SplashIntent.LogIn)
+        vm.userIntent.trySend(SplashEvent.LogIn)
     }
 
     when (val state = uiState) {

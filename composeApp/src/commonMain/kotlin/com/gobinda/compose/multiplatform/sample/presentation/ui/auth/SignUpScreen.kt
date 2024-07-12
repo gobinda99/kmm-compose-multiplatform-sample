@@ -24,6 +24,7 @@ import com.gobinda.compose.multiplatform.sample.presentation.component.InputFiel
 import com.gobinda.compose.multiplatform.sample.presentation.component.Loading
 import com.gobinda.compose.multiplatform.sample.presentation.component.PasswordField
 import com.gobinda.compose.multiplatform.sample.presentation.component.Spacer10
+import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.event.SignUpEvent
 import com.gobinda.compose.multiplatform.sample.utils.TripleState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel

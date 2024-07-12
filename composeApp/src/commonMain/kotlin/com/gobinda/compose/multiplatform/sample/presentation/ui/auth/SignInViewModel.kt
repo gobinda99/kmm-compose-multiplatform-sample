@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gobinda.compose.multiplatform.sample.data.source.UserRepository
 import com.gobinda.compose.multiplatform.sample.data.source.local.AppDataStore
-import com.gobinda.compose.multiplatform.sample.utils.TripleState
+import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.event.SignInEvent
+import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.state.SignInState
 import com.gobinda.compose.multiplatform.sample.utils.isValidEmail
 import com.gobinda.compose.multiplatform.sample.utils.isValidPassword
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,27 +13,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.StringResource
 import sample.composeapp.generated.resources.Res
 import sample.composeapp.generated.resources.email_empty
 import sample.composeapp.generated.resources.email_incorrect
 import sample.composeapp.generated.resources.not_record_found
 import sample.composeapp.generated.resources.password_empty
 import sample.composeapp.generated.resources.password_should
-
-data class SignInState(
-    val email: TripleState<String> = TripleState(""),
-    val pass: TripleState<String> = TripleState(""),
-    val loading: Boolean = false,
-    val success: Boolean = false,
-    val message: StringResource? = null,
-)
-
-sealed interface SignInEvent{
-    data object  Validate : SignInEvent
-    class Email(val name: String) : SignInEvent
-    class Pass( val name: String) : SignInEvent
-}
 
 class SignInViewModel(
     private val repository: UserRepository,

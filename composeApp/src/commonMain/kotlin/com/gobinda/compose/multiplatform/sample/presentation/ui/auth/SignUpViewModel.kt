@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gobinda.compose.multiplatform.sample.data.User
 import com.gobinda.compose.multiplatform.sample.data.source.UserRepository
-import com.gobinda.compose.multiplatform.sample.utils.TripleState
+import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.event.SignUpEvent
+import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.state.SignUpState
 import com.gobinda.compose.multiplatform.sample.utils.isValidEmail
 import com.gobinda.compose.multiplatform.sample.utils.isValidPassword
 
@@ -19,24 +20,6 @@ import sample.composeapp.generated.resources.name_empty
 import sample.composeapp.generated.resources.password_empty
 import sample.composeapp.generated.resources.password_not_matched
 import sample.composeapp.generated.resources.password_should
-
-data class SignUpState(
-    val name: TripleState<String> = TripleState(""),
-    val email: TripleState<String> = TripleState(""),
-    val pass: TripleState<String> = TripleState(""),
-    val cPass: TripleState<String> = TripleState(""),
-    val loading: Boolean = false,
-    val success: Boolean = false,
-    val message : String? = null
-)
-
-sealed interface SignUpEvent{
-    data object  Validate : SignUpEvent
-    class Name(val name: String) : SignUpEvent
-    class Email(val name: String) : SignUpEvent
-    class Pass( val name: String) : SignUpEvent
-    class Confirm(val name: String) : SignUpEvent
-}
 
 class SignUpViewModel constructor(
     private val repository: UserRepository, /*savedStateHandle: SavedStateHandle*/

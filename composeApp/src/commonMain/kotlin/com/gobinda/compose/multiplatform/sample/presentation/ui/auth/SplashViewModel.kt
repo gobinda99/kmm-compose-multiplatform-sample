@@ -3,6 +3,8 @@ package com.gobinda.compose.multiplatform.sample.presentation.ui.auth
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gobinda.compose.multiplatform.sample.data.source.local.AppDataStore
+import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.event.SplashEvent
+import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.state.SplashState
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,21 +15,11 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 
-sealed interface SplashState {
-    data object Loading : SplashState
-    data class Success(val anyUserLogIn: Boolean) : SplashState
-    data class Error(val message: String) : SplashState
-}
-
-sealed interface SplashIntent {
-    data object LogIn : SplashIntent
-}
-
 class SplashViewModel(
     private val pref: AppDataStore,
 ) : ViewModel() {
 
-    val userIntent = Channel<SplashIntent>(Channel.UNLIMITED)
+    val userIntent = Channel<SplashEvent>(Channel.UNLIMITED)
 
     private var _state = MutableStateFlow<SplashState>(SplashState.Loading)
 
@@ -43,7 +35,7 @@ class SplashViewModel(
             userIntent.consumeAsFlow()
                 .onEach {
                     when (it) {
-                        SplashIntent.LogIn -> {
+                        SplashEvent.LogIn -> {
                             login()
                         }
                     }

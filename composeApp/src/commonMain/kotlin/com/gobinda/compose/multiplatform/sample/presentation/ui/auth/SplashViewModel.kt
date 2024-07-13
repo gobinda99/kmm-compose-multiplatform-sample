@@ -2,7 +2,7 @@ package com.gobinda.compose.multiplatform.sample.presentation.ui.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gobinda.compose.multiplatform.sample.data.source.local.AppDataStore
+import com.gobinda.compose.multiplatform.sample.data.d_local.datasource.AppDataStore
 import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.event.SplashEvent
 import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.state.SplashState
 import kotlinx.coroutines.channels.Channel

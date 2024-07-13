@@ -2,8 +2,8 @@ package com.gobinda.compose.multiplatform.sample.presentation.ui.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gobinda.compose.multiplatform.sample.data.source.UserRepository
-import com.gobinda.compose.multiplatform.sample.data.source.local.AppDataStore
+import com.gobinda.compose.multiplatform.sample.domain.usecase.UserRepository
+import com.gobinda.compose.multiplatform.sample.data.d_local.datasource.AppDataStore
 import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.event.SignInEvent
 import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.state.SignInState
 import com.gobinda.compose.multiplatform.sample.utils.isValidEmail

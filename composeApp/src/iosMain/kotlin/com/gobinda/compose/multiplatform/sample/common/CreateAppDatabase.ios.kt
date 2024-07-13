@@ -1,13 +1,13 @@
 package com.gobinda.compose.multiplatform.sample.common
 import androidx.room.Room
-import com.gobinda.compose.multiplatform.sample.data.source.local.room.AppDatabase
+import com.gobinda.compose.multiplatform.sample.data.db.AppDatabase
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import com.gobinda.compose.multiplatform.sample.data.source.local.room.instantiateImpl
-import com.gobinda.compose.multiplatform.sample.data.source.local.room.dbFileName
+import com.gobinda.compose.multiplatform.sample.data.db.dbFileName
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSURL

@@ -1,10 +1,9 @@
 package com.gobinda.compose.multiplatform.sample.di
 
-import androidx.constraintlayout.core.dsl.Barrier
-import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.RestDataSource
-import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.RestDataSourceImpl
-import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.request.Token
-import com.gobinda.compose.multiplatform.sample.data.source.remote.ktor.request.TokenManager
+import com.gobinda.compose.multiplatform.sample.data.api.datasource.RestDataSource
+import com.gobinda.compose.multiplatform.sample.data.api.datasource.RestDataSourceImpl
+import com.gobinda.compose.multiplatform.sample.data.api.model.request.Token
+import com.gobinda.compose.multiplatform.sample.data.api.model.request.TokenManager
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -27,8 +26,6 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.Parameters
-import io.ktor.http.URLProtocol
-import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json

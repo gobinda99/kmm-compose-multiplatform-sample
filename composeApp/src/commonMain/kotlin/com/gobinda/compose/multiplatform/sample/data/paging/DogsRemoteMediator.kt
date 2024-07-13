@@ -1,4 +1,4 @@
-package com.gobinda.compose.multiplatform.sample.data.api.datasource
+package com.gobinda.compose.multiplatform.sample.data.paging
 
 
 import androidx.room.useWriterConnection
@@ -6,6 +6,7 @@ import app.cash.paging.ExperimentalPagingApi
 import app.cash.paging.LoadType
 import app.cash.paging.PagingState
 import app.cash.paging.RemoteMediator
+import com.gobinda.compose.multiplatform.sample.data.api.datasource.RestDataSource
 import com.gobinda.compose.multiplatform.sample.domain.model.DogsModel
 import com.gobinda.compose.multiplatform.sample.data.db.model.RemoteKeys
 import com.gobinda.compose.multiplatform.sample.data.db.AppDatabase

@@ -7,7 +7,7 @@ import app.cash.paging.PagingConfig
 import app.cash.paging.PagingData
 import app.cash.paging.cachedIn
 import com.gobinda.compose.multiplatform.sample.domain.model.DogsModel
-import com.gobinda.compose.multiplatform.sample.data.api.model.DogsRepository
+import com.gobinda.compose.multiplatform.sample.data.DogsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

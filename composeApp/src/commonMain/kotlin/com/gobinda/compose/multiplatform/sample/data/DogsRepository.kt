@@ -1,13 +1,13 @@
-package com.gobinda.compose.multiplatform.sample.data.api.model
+package com.gobinda.compose.multiplatform.sample.data
 
 import androidx.paging.PagingSource
 import com.gobinda.compose.multiplatform.sample.data.api.datasource.RestDataSource
 import com.gobinda.compose.multiplatform.sample.domain.model.DogsModel
-import com.gobinda.compose.multiplatform.sample.data.db.datasource.ModelDataSource
+import com.gobinda.compose.multiplatform.sample.data.db.datasource.DogsDataSource
 
-class DogsRepository (
+class DogsRepository(
     private val apiService: RestDataSource,
-    private val dataSource: ModelDataSource
+    private val dataSource: DogsDataSource
 ) {
     suspend fun getDogs(
         page: Int,
@@ -16,14 +16,13 @@ class DogsRepository (
         val data = apiService.getAllDogs(
             page, limit
         )
-//        dataSource.insertModel(data)
         return data
     }
 
-     fun getLocalDogs(): PagingSource<Int, DogsModel> = dataSource.getPagingModels()
+    fun getLocalDogs(): PagingSource<Int, DogsModel> = dataSource.getPagingModels()
 
-     suspend fun getLocalDogs(pageIndex: Int, pageSize: Int) = dataSource.getAllDogs(pageIndex, pageIndex)
-
+    suspend fun getLocalDogs(pageIndex: Int, pageSize: Int) =
+        dataSource.getAllDogs(pageIndex, pageSize)
 
 
 }

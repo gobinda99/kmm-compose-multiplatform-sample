@@ -27,11 +27,11 @@ internal fun SplashScreen(
     when (val state = uiState) {
         is SplashState.Loading -> Loading()
         is SplashState.Success -> {
-            if (state.anyUserLogIn) {
+            if (state.logIn) {
                 onNavigateMain()
             } else {
-                 onNavigateMain()
-//                onNavigateLogin()
+//                 onNavigateMain()
+                onNavigateLogin()
             }
         }
         is SplashState.Error -> {}

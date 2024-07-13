@@ -26,7 +26,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
 fun DogsScreen(
     modifier: Modifier = Modifier,
 //    viewModel: DogsViewModel = koinViewModel()
-    viewModel: DogsViewModeMediator = koinViewModel()
+    viewModel: DogsMediatorViewModel = koinViewModel()
 ) {
     val response = viewModel.dogResponse.collectAsLazyPagingItems()
 

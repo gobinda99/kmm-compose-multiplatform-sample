@@ -8,7 +8,7 @@ import app.cash.paging.PagingConfig
 import app.cash.paging.PagingData
 import app.cash.paging.cachedIn
 import com.gobinda.compose.multiplatform.sample.domain.model.DogsModel
-import com.gobinda.compose.multiplatform.sample.data.api.datasource.DogsRemoteMediator
+import com.gobinda.compose.multiplatform.sample.data.paging.DogsRemoteMediator
 import com.gobinda.compose.multiplatform.sample.data.db.AppDatabase
 import com.gobinda.compose.multiplatform.sample.data.api.model.DogsPagingSource
 import com.gobinda.compose.multiplatform.sample.data.api.datasource.RestDataSource
@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagingApi::class)
-class DogsViewModeMediator(
+class DogsMediatorViewModel(
     private val db: AppDatabase, private val apiService: RestDataSource,
     private val pagingSource: DogsPagingSource
 

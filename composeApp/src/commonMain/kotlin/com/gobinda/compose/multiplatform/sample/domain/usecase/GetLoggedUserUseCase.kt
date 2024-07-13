@@ -1,6 +1,6 @@
 package com.gobinda.compose.multiplatform.sample.domain.usecase
 
-interface UserLoggedUseCase {
+interface GetLoggedUserUseCase {
 
     suspend operator fun invoke() : Boolean
 }

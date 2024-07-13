@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
 
-class ModelDataSource (db: AppDatabase) {
+class DogsDataSource (db: AppDatabase) {
 
     val dispatcher : CoroutineDispatcher = Dispatchers.IO
 

@@ -1,4 +1,4 @@
-package com.gobinda.compose.multiplatform.sample.di
+package com.gobinda.compose.multiplatform.sample.data.api.di
 
 import com.gobinda.compose.multiplatform.sample.data.api.datasource.RestDataSource
 import com.gobinda.compose.multiplatform.sample.data.api.datasource.RestDataSourceImpl

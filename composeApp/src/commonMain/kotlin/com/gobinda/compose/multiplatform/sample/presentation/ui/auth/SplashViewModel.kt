@@ -2,7 +2,7 @@ package com.gobinda.compose.multiplatform.sample.presentation.ui.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gobinda.compose.multiplatform.sample.data.d_local.datasource.AppDataStore
+import com.gobinda.compose.multiplatform.sample.domain.usecase.GetLoggedUserUseCase
 import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.event.SplashEvent
 import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.state.SplashState
 import kotlinx.coroutines.channels.Channel
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 
 class SplashViewModel(
-    private val pref: AppDataStore,
+    private val userLogged: GetLoggedUserUseCase,
 ) : ViewModel() {
 
     val userIntent = Channel<SplashEvent>(Channel.UNLIMITED)
@@ -47,12 +47,9 @@ class SplashViewModel(
         viewModelScope.launch {
             _state.value = SplashState.Loading
             delay(1000L)
-            _state.value = SplashState.Success(anyUserLoggedIn())
+            _state.value = SplashState.Success(userLogged())
         }
     }
 
 
-    private suspend fun anyUserLoggedIn(): Boolean = pref.getBoolean("logIn") ?: false
-
-    private suspend fun logout() = pref.store("logIn", false)
 }

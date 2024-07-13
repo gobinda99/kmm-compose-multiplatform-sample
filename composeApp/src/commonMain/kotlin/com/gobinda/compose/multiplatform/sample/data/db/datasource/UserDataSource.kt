@@ -1,4 +1,4 @@
-package com.gobinda.compose.multiplatform.sample.data
+package com.gobinda.compose.multiplatform.sample.data.db.datasource
 
 import com.gobinda.compose.multiplatform.sample.domain.model.User
 import kotlinx.coroutines.flow.Flow

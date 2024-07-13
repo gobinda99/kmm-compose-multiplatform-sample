@@ -1,10 +1,10 @@
-package com.gobinda.compose.multiplatform.sample.data.db.datasource
+package com.gobinda.compose.multiplatform.sample.data.paging
 
 import app.cash.paging.PagingSource
 import app.cash.paging.PagingState
 import coil3.network.HttpException
+import com.gobinda.compose.multiplatform.sample.data.DogsRepository
 import com.gobinda.compose.multiplatform.sample.domain.model.DogsModel
-import com.gobinda.compose.multiplatform.sample.data.api.model.DogsRepository
 import io.ktor.utils.io.errors.IOException
 
 class DogsPagingSourceDatabase (

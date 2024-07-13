@@ -3,7 +3,7 @@ package com.gobinda.compose.multiplatform.sample.presentation.ui.auth
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gobinda.compose.multiplatform.sample.domain.model.User
-import com.gobinda.compose.multiplatform.sample.domain.usecase.UserRepository
+import com.gobinda.compose.multiplatform.sample.domain.usecase.RegisterUserUseCase
 import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.event.SignUpEvent
 import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.state.SignUpState
 import com.gobinda.compose.multiplatform.sample.utils.isValidEmail
@@ -22,7 +22,7 @@ import sample.composeapp.generated.resources.password_not_matched
 import sample.composeapp.generated.resources.password_should
 
 class SignUpViewModel constructor(
-    private val repository: UserRepository, /*savedStateHandle: SavedStateHandle*/
+    private val registerUser: RegisterUserUseCase, /*savedStateHandle: SavedStateHandle*/
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(SignUpState())
@@ -92,7 +92,7 @@ class SignUpViewModel constructor(
                 viewModelScope.launch(handler) {
                     delay(3000)
 
-                    repository.insertUser(with(_uiState.value){ User(email.value, name = name.value, pass.value) }).also {
+                    registerUser(with(_uiState.value){ User(email.value, name = name.value, pass.value) }).also {
 
                             withContext(Dispatchers.Main) {
                                 newState = newState.copy(loading = false, success = true)

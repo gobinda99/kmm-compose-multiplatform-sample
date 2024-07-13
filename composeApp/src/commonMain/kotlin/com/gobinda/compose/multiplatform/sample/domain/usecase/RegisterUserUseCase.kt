@@ -2,7 +2,7 @@ package com.gobinda.compose.multiplatform.sample.domain.usecase
 
 import com.gobinda.compose.multiplatform.sample.domain.model.User
 
-interface LoginUseCase {
+interface RegisterUserUseCase {
 
-    suspend operator fun invoke(email : String, pass: String) : User?
+    suspend operator fun invoke(user: User)
 }

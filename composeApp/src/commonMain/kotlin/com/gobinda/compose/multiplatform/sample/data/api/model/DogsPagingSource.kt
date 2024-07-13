@@ -3,6 +3,7 @@ package com.gobinda.compose.multiplatform.sample.data.api.model
 import app.cash.paging.PagingSource
 import app.cash.paging.PagingState
 import coil3.network.HttpException
+import com.gobinda.compose.multiplatform.sample.data.DogsRepository
 import com.gobinda.compose.multiplatform.sample.domain.model.DogsModel
 import io.ktor.utils.io.errors.IOException
 

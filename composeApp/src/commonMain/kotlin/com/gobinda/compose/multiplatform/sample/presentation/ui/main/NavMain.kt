@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.gobinda.compose.multiplatform.sample.presentation.navigation.MainNav
-import com.gobinda.compose.multiplatform.sample.presentation.ui.pagination.DogsScreen
+import com.gobinda.compose.multiplatform.sample.presentation.ui.pagination.PagingScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,7 +48,7 @@ fun NavMain(
         }*/
 
         composable(MainNav.Home.route) {
-            DogsScreen()
+            PagingScreen()
         }
 
     }

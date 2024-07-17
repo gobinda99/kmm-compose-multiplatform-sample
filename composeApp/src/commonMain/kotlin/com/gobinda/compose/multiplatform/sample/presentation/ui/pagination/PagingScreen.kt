@@ -1,6 +1,8 @@
 package com.gobinda.compose.multiplatform.sample.presentation.ui.pagination
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,20 +18,32 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
+import app.cash.paging.compose.LazyPagingItems
 import app.cash.paging.compose.collectAsLazyPagingItems
 import coil3.compose.AsyncImage
+import com.gobinda.compose.multiplatform.sample.domain.model.DogsModel
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
-fun DogsScreen(
+fun PagingScreen(
     modifier: Modifier = Modifier,
-//    viewModel: DogsViewModel = koinViewModel()
-    viewModel: DogsMediatorViewModel = koinViewModel()
+    viewModel: PagingViewModel = koinViewModel()
+    /* viewModel: PagingMediatorViewModel = koinViewModel()*/
 ) {
     val response = viewModel.dogResponse.collectAsLazyPagingItems()
 
+    PagingContent(modifier, response)
+
+}
+
+
+@Composable
+private fun PagingContent(
+    modifier: Modifier,
+    response: LazyPagingItems<DogsModel>
+) {
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(3),
         modifier = modifier.fillMaxSize()
@@ -38,7 +52,7 @@ fun DogsScreen(
         items(response.itemCount) {
             AsyncImage(
                 model = response[it]?.url ?: "-",
-               /* placeholder = painterResource(Res.drawable.ic_cyclone),*/
+                /* placeholder = painterResource(Res.drawable.ic_cyclone),*/
                 contentDescription = "",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -46,39 +60,29 @@ fun DogsScreen(
                     .clip(CircleShape)
             )
 
-            /*AsyncImage(
-                modifier = Modifier
-                    .size(250.dp)
-                    .padding(16.dp)
-                    .run { if (isAnimate) rotate(rotate) else this },
-                model = "https://media.themoviedb.org/t/p/w440_and_h660_face/czembW0Rk1Ke7lCJGahbOhdCuhV.jpg",
-                contentDescription = null
-            )*/
         }
 
-        response.apply {
-            when {
-                loadState.refresh is LoadState.Loading || loadState.append is LoadState.Loading -> {
-                    item {
-                        Box(
-                            modifier = Modifier.fillMaxWidth(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            CircularProgressIndicator(
-                                modifier = Modifier.align(Alignment.Center)
-                            )
-                        }
-                    }
+    }
+
+    response.apply {
+        when {
+            loadState.refresh is LoadState.Loading || loadState.append is LoadState.Loading -> {
+
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    CircularProgressIndicator()
                 }
 
-                loadState.refresh is LoadState.Error || loadState.append is LoadState.Error -> {
-                    item {
-                        Text(text = "Error")
-                    }
-                }
+            }
 
-                loadState.refresh is LoadState.NotLoading -> {
-                }
+            loadState.refresh is LoadState.Error || loadState.append is LoadState.Error -> {
+                Text(text = "Error")
+            }
+
+            loadState.refresh is LoadState.NotLoading -> {
             }
         }
     }

@@ -10,6 +10,7 @@ import com.gobinda.compose.multiplatform.sample.utils.isValidEmail
 import com.gobinda.compose.multiplatform.sample.utils.isValidPassword
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -25,7 +26,6 @@ class SignInViewModel(
     private val updateLogin: UpdateLoggedUserUseCase
 ) : ViewModel() {
 
-
     private var _uiState = MutableStateFlow(SignInState())
 
     val uiState: StateFlow<SignInState>
@@ -36,6 +36,7 @@ class SignInViewModel(
             is SignInEvent.Email -> setEmail(event.name)
             is SignInEvent.Pass -> setPass(event.name)
             is SignInEvent.Validate -> validate()
+
         }
     }
 
@@ -99,6 +100,14 @@ class SignInViewModel(
                             _uiState.value = newState
                         }
 
+                    }
+                    .catch {
+                        newState = newState.copy(
+                            loading = false,
+                            success = false,
+                            message = Res.string.not_record_found
+                        )
+                        _uiState.value = newState
                     }
                     .stateIn(
                         scope = viewModelScope,

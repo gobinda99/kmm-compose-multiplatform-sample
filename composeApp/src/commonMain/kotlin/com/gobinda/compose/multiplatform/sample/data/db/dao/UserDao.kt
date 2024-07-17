@@ -15,6 +15,9 @@ interface UserDao {
     @Query("SELECT * from users where email = :email LIMIT 1")
     fun loadUserByEmail(email: String): Flow<User>
 
+    @Query("SELECT * from users where email = :email and password = :pass LIMIT 1")
+    fun loadUser(email: String, pass : String): Flow<User>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(users: List<User>)
 

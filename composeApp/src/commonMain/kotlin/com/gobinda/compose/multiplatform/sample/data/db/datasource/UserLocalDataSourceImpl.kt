@@ -23,6 +23,12 @@ class UserLocalDataSourceImpl (db: AppDatabase) :
         }
     }
 
+    override fun getUser(email: String, pass: String): Flow<Result<User>> {
+        return dao.loadUser(email, pass).map {
+            Result.success(it)
+        }
+    }
+
     override suspend fun insertUser(user: User) : Long {
         return withContext(dispatcher){
             dao.insertUser(user)

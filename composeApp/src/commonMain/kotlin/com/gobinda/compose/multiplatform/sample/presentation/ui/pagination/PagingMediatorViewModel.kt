@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagingApi::class)
-class DogsMediatorViewModel(
+class PagingMediatorViewModel(
     private val db: AppDatabase, private val apiService: RestDataSource,
     private val pagingSource: DogsPagingSource
 

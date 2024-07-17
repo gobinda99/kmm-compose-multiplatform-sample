@@ -8,6 +8,6 @@ import kotlinx.coroutines.flow.Flow
 class LoginUserUseCaseImpl(private val userDataSource: UserDataSource) : LoginUserUseCase {
 
     override fun invoke(email: String, pass: String): Flow<Result<User?>> {
-       return userDataSource.getUser(email)
+       return userDataSource.getUser(email, pass)
     }
 }

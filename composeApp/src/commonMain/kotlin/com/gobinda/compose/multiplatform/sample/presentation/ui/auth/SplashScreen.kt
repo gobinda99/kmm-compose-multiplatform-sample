@@ -24,17 +24,26 @@ internal fun SplashScreen(
         vm.userIntent.trySend(SplashEvent.LogIn)
     }
 
+    LaunchedEffect(uiState){
+        when (val state = uiState) {
+            is SplashState.Success -> {
+                if (state.logIn) {
+                    onNavigateMain()
+                } else {
+                    onNavigateLogin()
+                }
+            }
+            is SplashState.Error -> {}
+            else -> {}
+        }
+    }
     when (val state = uiState) {
         is SplashState.Loading -> Loading()
-        is SplashState.Success -> {
-            if (state.logIn) {
-                onNavigateMain()
-            } else {
-//                 onNavigateMain()
-                onNavigateLogin()
-            }
+        else -> {
+
         }
-        is SplashState.Error -> {}
     }
+
+
 
 }

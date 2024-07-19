@@ -45,7 +45,8 @@ private fun PagingContent(
     response: LazyPagingItems<DogsModel>
 ) {
     LazyVerticalStaggeredGrid(
-        columns = StaggeredGridCells.Fixed(3),
+//        columns = StaggeredGridCells.Fixed(3),
+        columns = StaggeredGridCells.Adaptive(175.dp),
         modifier = modifier.fillMaxSize()
     ) {
 
@@ -54,10 +55,10 @@ private fun PagingContent(
                 model = response[it]?.url ?: "-",
                 /* placeholder = painterResource(Res.drawable.ic_cyclone),*/
                 contentDescription = "",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
+                contentScale = ContentScale.FillBounds,
+               /* modifier = Modifier
                     .padding(20.dp)
-                    .clip(CircleShape)
+                    .clip(CircleShape)*/
             )
 
         }

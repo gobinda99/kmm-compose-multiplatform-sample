@@ -17,35 +17,6 @@ fun NavMain(
     val navController: NavHostController = rememberNavController()
 
     NavHost(navController = navController, startDestination = MainNav.Home.route) {
-       /* composable(MainNav.Home.route) {
-            val scope = rememberCoroutineScope()
-            val data = koinInject<AppDatabase>()
-            val rest = koinInject<RestDataSource>()
-
-
-            LaunchedEffect(true) {
-                scope.launch {
-
-                    runCatching {
-                        withContext(Dispatchers.IO){
-                            data.remoteKeyDao().insertRemote(listOf(
-                                RemoteKeys("1",1,2),
-                                RemoteKeys("c",1,2),
-                                RemoteKeys("c",1,2),
-                                RemoteKeys("c",1,2),
-                            ))
-                        }
-
-                        rest.getAllDogs(1,20)
-
-                    }.onSuccess {
-                        Napier.i(message = it?.size.toString() ?: "", tag = "GGGYYY")
-                    }.onFailure {
-                        Napier.e(message = it.message ?: "", throwable = it.cause, tag = "GGGYYY")
-                    }
-                }
-            }
-        }*/
 
         composable(MainNav.Home.route) {
             PagingScreen()

@@ -18,8 +18,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
 
 @OptIn(ExperimentalPagingApi::class)
+@KoinViewModel
 class PagingMediatorViewModel(
     private val db: AppDatabase, private val apiService: RestDataSource,
     private val pagingSource: DogsPagingSource

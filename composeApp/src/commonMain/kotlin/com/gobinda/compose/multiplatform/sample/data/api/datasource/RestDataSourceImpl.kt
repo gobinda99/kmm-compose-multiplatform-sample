@@ -15,8 +15,9 @@ import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
+import org.koin.core.annotation.Single
 
-
+@Single
 class RestDataSourceImpl(private val httpClient: HttpClient) : RestDataSource {
 
     override suspend fun getRandomUser(): RandomUser? {

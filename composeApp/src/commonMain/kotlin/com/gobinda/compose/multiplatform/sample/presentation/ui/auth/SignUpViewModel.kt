@@ -12,6 +12,7 @@ import com.gobinda.compose.multiplatform.sample.utils.isValidPassword
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import org.koin.android.annotation.KoinViewModel
 import sample.composeapp.generated.resources.Res
 import sample.composeapp.generated.resources.confirm_password_empty
 import sample.composeapp.generated.resources.email_empty
@@ -20,7 +21,7 @@ import sample.composeapp.generated.resources.name_empty
 import sample.composeapp.generated.resources.password_empty
 import sample.composeapp.generated.resources.password_not_matched
 import sample.composeapp.generated.resources.password_should
-
+@KoinViewModel
 class SignUpViewModel constructor(
     private val registerUser: RegisterUserUseCase, /*savedStateHandle: SavedStateHandle*/
 ) : ViewModel() {

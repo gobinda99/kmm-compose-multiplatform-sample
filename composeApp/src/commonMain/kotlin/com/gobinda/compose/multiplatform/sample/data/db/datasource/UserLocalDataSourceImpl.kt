@@ -8,7 +8,9 @@ import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import org.koin.core.annotation.Single
 
+@Single
 class UserLocalDataSourceImpl (db: AppDatabase) :
     UserDataSource {
 

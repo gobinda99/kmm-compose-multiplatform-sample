@@ -4,7 +4,9 @@ import androidx.paging.PagingSource
 import com.gobinda.compose.multiplatform.sample.data.api.datasource.RestDataSource
 import com.gobinda.compose.multiplatform.sample.domain.model.DogsModel
 import com.gobinda.compose.multiplatform.sample.data.db.datasource.DogsDataSource
+import org.koin.core.annotation.Factory
 
+@Factory
 class DogsRepository(
     private val apiService: RestDataSource,
     private val dataSource: DogsDataSource

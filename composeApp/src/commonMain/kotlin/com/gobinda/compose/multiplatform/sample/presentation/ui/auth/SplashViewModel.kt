@@ -13,8 +13,9 @@ import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
 
-
+@KoinViewModel
 class SplashViewModel(
     private val userLogged: GetLoggedUserUseCase,
 ) : ViewModel() {

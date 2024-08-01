@@ -29,6 +29,8 @@ import io.ktor.http.Parameters
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
+import org.koin.core.annotation.Module
+import org.koin.core.annotation.Single
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -87,6 +89,96 @@ val networkModule = module {
                             val refreshTokenInfo: Token = client.submitForm(
                                 url = "token",
                                 formParameters = Parameters.build {
+                                    append("grant_type", "refresh_token")
+//                                append("client_id", clientId)
+                                    append("refresh_token", token.refreshToken)
+                                }
+                            ) { markAsRefreshTokenRequest() }.body()
+
+                            saveToken(refreshTokenInfo)
+
+                            with(refreshTokenInfo) {
+                                BearerTokens(accessToken, refreshToken)
+                            }
+                        }
+                    }
+                }
+            }
+            install(HttpTimeout) {
+                val timeout = 60000L
+                connectTimeoutMillis = timeout
+                requestTimeoutMillis = timeout
+                socketTimeoutMillis = timeout
+            }
+            install(ResponseObserver) {
+                onResponse { response ->
+
+                }
+            }
+            HttpResponseValidator {
+                validateResponse { response: HttpResponse ->
+                    val statusCode = response.status.value
+
+                }
+            }
+        }
+    }
+}
+
+
+@Module
+class NetworkModule {
+
+    @Single
+    fun json() {
+        Json {
+            explicitNulls = false
+            ignoreUnknownKeys = true
+            isLenient = true
+            prettyPrint = true
+            encodeDefaults = true
+            classDiscriminator = "#class"
+        }
+    }
+
+    @Single
+    fun httpClient(json: Json, manager: TokenManager) {
+        HttpClient {
+            expectSuccess = true
+            install(DefaultRequest) {
+                url {
+                    url("https://randomuser.me/")
+                    /*parameters.append("key", "value")*/
+                }
+
+                header(HttpHeaders.ContentType, ContentType.Application.Json)
+            }
+            install(Resources)
+            install(ContentNegotiation) {
+                json(json)
+            }
+            install(HttpCache)
+            install(Logging) {
+                level = LogLevel.INFO
+                logger = object : Logger {
+                    override fun log(message: String) {
+                        Napier.v(tag = "Ktor Client", message = message)
+                    }
+                }
+            }
+            install(Auth) {
+                bearer {
+                    loadTokens {
+                        with(manager.token) {
+                            BearerTokens(accessToken, refreshToken)
+                        }
+                    }
+
+                    refreshTokens {
+                        with(manager) {
+                            val refreshTokenInfo: Token = client.submitForm(
+                                url = "token",
+                                formParameters = io.ktor.http.Parameters.build {
                                     append("grant_type", "refresh_token")
 //                                append("client_id", clientId)
                                     append("refresh_token", token.refreshToken)

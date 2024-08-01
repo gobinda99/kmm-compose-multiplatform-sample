@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
 import sample.composeapp.generated.resources.Res
 import sample.composeapp.generated.resources.email_empty
 import sample.composeapp.generated.resources.email_incorrect
@@ -21,6 +22,7 @@ import sample.composeapp.generated.resources.not_record_found
 import sample.composeapp.generated.resources.password_empty
 import sample.composeapp.generated.resources.password_should
 
+@KoinViewModel
 class SignInViewModel(
     private val login: LoginUserUseCase,
     private val updateLogin: UpdateLoggedUserUseCase

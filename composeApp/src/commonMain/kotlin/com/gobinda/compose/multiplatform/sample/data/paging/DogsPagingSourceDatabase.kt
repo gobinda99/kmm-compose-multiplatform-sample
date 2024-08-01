@@ -6,7 +6,9 @@ import coil3.network.HttpException
 import com.gobinda.compose.multiplatform.sample.data.DogsRepository
 import com.gobinda.compose.multiplatform.sample.domain.model.DogsModel
 import io.ktor.utils.io.errors.IOException
+import org.koin.core.annotation.Factory
 
+@Factory
 class DogsPagingSourceDatabase (
     private val repository: DogsRepository
 ) : PagingSource<Int, DogsModel>() {

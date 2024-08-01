@@ -11,7 +11,9 @@ import com.gobinda.compose.multiplatform.sample.data.api.model.DogsPagingSource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class PagingViewModel(
     private val dogsPagingSource: DogsPagingSource,
 ) : ViewModel() {

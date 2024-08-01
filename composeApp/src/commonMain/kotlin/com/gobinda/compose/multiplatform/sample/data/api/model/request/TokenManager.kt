@@ -4,7 +4,9 @@ import com.gobinda.compose.multiplatform.sample.data.d_local.datasource.AppDataS
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import org.koin.core.annotation.Single
 
+@Single
 class TokenManager(val dataStore : AppDataStore) {
     var token : Token = Token()
 

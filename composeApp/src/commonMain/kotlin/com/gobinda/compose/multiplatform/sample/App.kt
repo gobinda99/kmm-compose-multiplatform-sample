@@ -14,6 +14,7 @@ import coil3.request.CachePolicy
 import coil3.request.crossfade
 import coil3.util.DebugLogger
 import com.gobinda.compose.multiplatform.sample.common.Context
+import com.gobinda.compose.multiplatform.sample.di.AppModule
 import com.gobinda.compose.multiplatform.sample.di.appModule
 import com.gobinda.compose.multiplatform.sample.presentation.NavApp
 import com.gobinda.compose.multiplatform.sample.theme.AppTheme

@@ -32,6 +32,7 @@ fun PagingScreen(
     viewModel: PagingViewModel = koinViewModel()
     /* viewModel: PagingMediatorViewModel = koinViewModel()*/
 ) {
+    val viewModel2: PagingMediatorViewModel = koinViewModel()
     val response = viewModel.dogResponse.collectAsLazyPagingItems()
 
     PagingContent(modifier, response)

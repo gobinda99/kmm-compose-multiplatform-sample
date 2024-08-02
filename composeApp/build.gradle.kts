@@ -3,6 +3,7 @@ import com.android.build.api.dsl.ManagedVirtualDevice
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
+import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -51,6 +52,9 @@ kotlin {
     }
 
     sourceSets {
+//        commonMain.configure {
+//            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+//        }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -134,18 +138,19 @@ kotlin {
         }
 
     }
-
-   sourceSets.named("commonMain").configure {
+    sourceSets.named("commonMain").configure {
         kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
     }
+
 }
 
 ksp {
     arg("USE_COMPOSE_VIEWMODEL","true")
-    arg("KOIN_CONFIG_CHECK","true")
+//    arg("KOIN_CONFIG_CHECK","true")
 }
 
 android {
+
     namespace = "com.gobinda.compose.multiplatform.sample"
     compileSdk = 34
 
@@ -188,6 +193,7 @@ android {
         //enables a Compose tooling support in the AndroidStudio
         compose = true
     }
+
 }
 
 buildConfig {
@@ -212,16 +218,30 @@ dependencies {
     add("kspIosArm64", libs.androidx.room.compiler)
 
     add("kspCommonMainMetadata", libs.koin.ksp.compiler)
-    add("kspAndroid", libs.koin.ksp.compiler)
-    add("kspIosX64", libs.koin.ksp.compiler)
-    add("kspIosArm64", libs.koin.ksp.compiler)
-    add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
+//    add("kspAndroid", libs.koin.ksp.compiler)
+//    add("kspIosX64", libs.koin.ksp.compiler)
+//    add("kspIosArm64", libs.koin.ksp.compiler)
+//    add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
 
+}
 
-
-
+tasks.withType<KotlinCompile<*>>().configureEach {
+    if (name != "kspCommonMainKotlinMetadata") {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
+}
+afterEvaluate {
+    tasks.filter {
+        it.name.contains("SourcesJar", true)
+    }?.forEach {
+        println("SourceJarTask====>${it.name}")
+        it.dependsOn("kspCommonMainKotlinMetadata")
+    }
 }
 
 room {
     schemaDirectory("$projectDir/schemas")
 }
+
+
+

@@ -5,10 +5,10 @@ import app.cash.paging.PagingState
 import coil3.network.HttpException
 import com.gobinda.compose.multiplatform.sample.data.DogsRepository
 import com.gobinda.compose.multiplatform.sample.domain.model.DogsModel
+import io.github.aakira.napier.Napier
 import io.ktor.utils.io.errors.IOException
 import org.koin.core.annotation.Factory
-
-@Factory
+@Factory(/*[DogsPagingSource::class]*/)
 class DogsPagingSource (
     private val repository: DogsRepository
 ) : PagingSource<Int, DogsModel>() {

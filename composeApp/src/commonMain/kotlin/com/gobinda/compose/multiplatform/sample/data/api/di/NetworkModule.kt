@@ -4,6 +4,7 @@ import com.gobinda.compose.multiplatform.sample.data.api.datasource.RestDataSour
 import com.gobinda.compose.multiplatform.sample.data.api.datasource.RestDataSourceImpl
 import com.gobinda.compose.multiplatform.sample.data.api.model.request.Token
 import com.gobinda.compose.multiplatform.sample.data.api.model.request.TokenManager
+import com.gobinda.compose.multiplatform.sample.di.AppModule
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -34,6 +35,7 @@ import org.koin.core.annotation.Single
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
+import kotlin.contracts.Returns
 
 
 @OptIn(ExperimentalSerializationApi::class)
@@ -130,8 +132,8 @@ val networkModule = module {
 class NetworkModule {
 
     @Single
-    fun json() {
-        Json {
+    fun json() : Json {
+        return Json {
             explicitNulls = false
             ignoreUnknownKeys = true
             isLenient = true
@@ -142,8 +144,8 @@ class NetworkModule {
     }
 
     @Single
-    fun httpClient(json: Json, manager: TokenManager) {
-        HttpClient {
+    fun httpClient(json: Json, manager: TokenManager) :HttpClient{
+        return HttpClient {
             expectSuccess = true
             install(DefaultRequest) {
                 url {
@@ -208,7 +210,6 @@ class NetworkModule {
             HttpResponseValidator {
                 validateResponse { response: HttpResponse ->
                     val statusCode = response.status.value
-
                 }
             }
         }

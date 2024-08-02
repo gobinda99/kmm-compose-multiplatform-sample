@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.gobinda.compose.multiplatform.sample.di.AppModule
 import kotlinx.coroutines.flow.first
 
 internal val prefName = "com.gobinda.compose.multiplatform.sample.common"

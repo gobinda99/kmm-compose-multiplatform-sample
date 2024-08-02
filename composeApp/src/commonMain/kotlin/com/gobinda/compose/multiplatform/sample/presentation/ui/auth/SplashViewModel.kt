@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.gobinda.compose.multiplatform.sample.domain.usecase.GetLoggedUserUseCase
 import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.event.SplashEvent
 import com.gobinda.compose.multiplatform.sample.presentation.ui.auth.state.SplashState
+import io.ktor.client.HttpClient
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -39,6 +40,7 @@ class SplashViewModel(
                         SplashEvent.LogIn -> {
                             login()
                         }
+                        else -> {}
                     }
                 }.stateIn(viewModelScope)
         }

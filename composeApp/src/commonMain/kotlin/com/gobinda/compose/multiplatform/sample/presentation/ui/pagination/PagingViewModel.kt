@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import app.cash.paging.Pager
 import app.cash.paging.PagingConfig
 import app.cash.paging.PagingData
+import app.cash.paging.PagingSource
 import app.cash.paging.cachedIn
 import com.gobinda.compose.multiplatform.sample.domain.model.DogsModel
 import com.gobinda.compose.multiplatform.sample.data.api.model.DogsPagingSource

@@ -8,7 +8,7 @@ import com.gobinda.compose.multiplatform.sample.domain.model.DogsModel
 import io.ktor.utils.io.errors.IOException
 import org.koin.core.annotation.Factory
 
-@Factory
+@Factory([DogsPagingSourceDatabase::class])
 class DogsPagingSourceDatabase (
     private val repository: DogsRepository
 ) : PagingSource<Int, DogsModel>() {

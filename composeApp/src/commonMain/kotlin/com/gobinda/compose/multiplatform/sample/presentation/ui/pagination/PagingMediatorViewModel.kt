@@ -6,12 +6,14 @@ import androidx.paging.ExperimentalPagingApi
 import app.cash.paging.Pager
 import app.cash.paging.PagingConfig
 import app.cash.paging.PagingData
+import app.cash.paging.PagingSource
 import app.cash.paging.cachedIn
 import com.gobinda.compose.multiplatform.sample.domain.model.DogsModel
 import com.gobinda.compose.multiplatform.sample.data.paging.DogsRemoteMediator
 import com.gobinda.compose.multiplatform.sample.data.db.AppDatabase
 import com.gobinda.compose.multiplatform.sample.data.api.model.DogsPagingSource
 import com.gobinda.compose.multiplatform.sample.data.api.datasource.RestDataSource
+import com.gobinda.compose.multiplatform.sample.data.paging.DogsPagingSourceDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +26,9 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 class PagingMediatorViewModel(
     private val db: AppDatabase, private val apiService: RestDataSource,
-    private val pagingSource: DogsPagingSource
+//    private val pagingSource: DogsPagingSource
+    private val pagingSource: PagingSource<Int, DogsModel>,
+    private val pagingSource1: DogsPagingSourceDatabase
 
 ) : ViewModel() {
 

@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -218,14 +219,15 @@ dependencies {
     add("kspIosArm64", libs.androidx.room.compiler)
 
     add("kspCommonMainMetadata", libs.koin.ksp.compiler)
-//    add("kspAndroid", libs.koin.ksp.compiler)
-//    add("kspIosX64", libs.koin.ksp.compiler)
-//    add("kspIosArm64", libs.koin.ksp.compiler)
-//    add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
+    // DO NOT add bellow dependencies
+    /*add("kspAndroid", libs.koin.ksp.compiler)
+    add("kspIosX64", libs.koin.ksp.compiler)
+    add("kspIosArm64", libs.koin.ksp.compiler)
+    add("kspIosSimulatorArm64", libs.koin.ksp.compiler)*/
 
 }
-
-tasks.withType<KotlinCompile<*>>().configureEach {
+// WORKAROUND: ADD this dependsOn("kspCommonMainKotlinMetadata") instead of above dependencies
+tasks.withType<KotlinCompilationTask<*>>().configureEach {
     if (name != "kspCommonMainKotlinMetadata") {
         dependsOn("kspCommonMainKotlinMetadata")
     }
@@ -233,7 +235,7 @@ tasks.withType<KotlinCompile<*>>().configureEach {
 afterEvaluate {
     tasks.filter {
         it.name.contains("SourcesJar", true)
-    }?.forEach {
+    }.forEach {
         println("SourceJarTask====>${it.name}")
         it.dependsOn("kspCommonMainKotlinMetadata")
     }

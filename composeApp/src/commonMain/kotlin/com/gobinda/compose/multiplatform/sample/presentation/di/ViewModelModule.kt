@@ -8,16 +8,9 @@ import com.gobinda.compose.multiplatform.sample.presentation.ui.pagination.Pagin
 import org.koin.compose.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
-val vModelModule = module {
+val vModelDlsModule = module {
 
-    viewModelOf(::SplashViewModel)
-
-    viewModelOf(::SignInViewModel)
-
-    viewModelOf(::SignUpViewModel)
-
-    viewModelOf(::PagingViewModel)
-
-    viewModelOf(::PagingMediatorViewModel)
-
+    /*Add and dsl view model here if required
+    Example : viewModelOf(::SplashViewModel)
+     */
 }
